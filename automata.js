@@ -4,7 +4,6 @@ class Automata {
         gameEngine.addEntity(this);
         this.generation = 0;
         this.ponds = [new Pond()];
-        this.lastHumanId = 0;
         this.humans = Array.from({ length: PARAMS.initialHumans}, (_, index) => new Human());
 
 
@@ -37,6 +36,8 @@ class Automata {
         for (let human of this.humans) {
             human.draw(ctx);
         }
+
+//        ctx.restore();
       
     }
 }

@@ -4,22 +4,44 @@ class DataManager {
 
         // population data
         this.fishPopulation = [];
+        this.humanPopulation = [];
+        this.humanSupply = [];
+        this.humanEnergy = [];
+        this.humanAveEnergy = [];
 
         // Initialize the Histogram instance for visualization
-        gameEngine.addGraph(new Graph(800, 0, [this.fishPopulation], "Fish"));
+        let graphX = 50;
+        gameEngine.addGraph(new Graph(graphX, 0, [this.fishPopulation], "Fish"));
+        gameEngine.addGraph(new Graph(graphX, 150, [this.humanPopulation], "Humans"));
+        gameEngine.addGraph(new Graph(graphX, 300, [this.humanSupply], "Human Supply"));
+        gameEngine.addGraph(new Graph(graphX, 450, [this.humanEnergy], "Human Energy"));
+        gameEngine.addGraph(new Graph(graphX, 600, [this.humanAveEnergy], "Average Human Energy"));
     }
 
 
     updateData() {
-        let fishPop = 0;
+        this.fishPopulation.push(this.automata.ponds[0].numFish);
 
-        for (let pond of this.automata.ponds) {
-            let numFish = pond.numFish;
-            fishPop += numFish
+        let humanPop = this.automata.humans.length;
+        this.humanPopulation.push(humanPop);
+
+
+        let humanSupply = 0;
+        for (let human of this.automata.humans) {
+            let sply = human.supply;
+            humanSupply += sply;
         }
+        this.humanSupply.push(humanSupply);
 
-        // Append the new histogram to the geneticHistogramData for time-series tracking
-        this.fishPopulation.push(fishPop);
+        let humanEnergy = 0;
+        for (let human of this.automata.humans) {
+            let engy = human.energy;
+            humanEnergy += engy;
+        }
+        this.humanEnergy.push(humanEnergy);
+        this.humanAveEnergy.push(humanEnergy / humanPop);
+
+
     }
 
     logData() {

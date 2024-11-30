@@ -74,19 +74,19 @@ class GameEngine {
         this.graphs.push(graph);
     }
     draw() {
+//        this.ctx.clearRect(0, 0, this.ctx.canvas.height, this.ctx.canvas.height); // clear sim square only
+//        for (var i = 0; i < this.entities.length; i++) {
+//            this.entities[i].draw(this.ctx);
+//        }
+//        this.ctx.clearRect(0, 0, this.ctx.canvas.height, this.ctx.canvas.width); // clear sim square only
+//        for (var i = 0; i < this.entities.length; i++) {
+//            this.entities[i].draw(this.ctx);
+//        }
         if (this.automata.generation % PARAMS.reportingPeriod === 0) {
-            this.ctx.clearRect(this.ctx.canvas.height, 0, this.ctx.canvas.height, this.ctx.canvas.height); // clear graphs only
+            this.ctx.clearRect(50, 0, this.ctx.canvas.width - 50, this.ctx.canvas.height); // clear graphs only
             for (var i = 0; i < this.graphs.length; i++) {
                 this.graphs[i].draw(this.ctx);
             }
-        }
-        this.ctx.clearRect(0, 0, this.ctx.canvas.height, this.ctx.canvas.height); // clear sim square only
-        for (var i = 0; i < this.entities.length; i++) {
-            this.entities[i].draw(this.ctx);
-        }
-        this.ctx.clearRect(0, 0, this.ctx.canvas.height, this.ctx.canvas.width); // clear sim square only
-        for (var i = 0; i < this.entities.length; i++) {
-            this.entities[i].draw(this.ctx);
         }
     }
     update() {

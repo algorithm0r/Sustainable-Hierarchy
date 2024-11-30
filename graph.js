@@ -6,7 +6,7 @@ class Graph {
         this.data = data;
         this.label = label;
 
-        this.xSize = 400;
+        this.xSize = 1000;
         this.ySize = 135;
         this.ctx = gameEngine.ctx;
         this.colors = ["#00BB00", "#BB0000", "#00BBBB", "#CCCCCC"];

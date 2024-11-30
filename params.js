@@ -38,8 +38,9 @@ var PARAMS = {
     initialEnergy: 60,
     deathThreshold: 0,
     reproductionThreshold: 80,
-    eatThreshold: 10,
+    eatThreshold: 90,
     ratioEnergyToOffspring: .4,
+    basicEnergyDepletion: .01,
 
 
     // data gathering

@@ -9,8 +9,8 @@ class Pond {
 
   
     draw(ctx) {
-        ctx.fillStyle = rgb(200, 200, 0);
-        ctx.fillRect(this.x, this.y, 10, 20);
+//        ctx.fillStyle = rgb(200, 200, 0);
+//        ctx.fillRect(this.x, this.y, 10, 20);
     }
 
     growthModel(numFish) {
