@@ -1,5 +1,7 @@
 // This game shell was happily copied from Googler Seth Ladd's "Bad Aliens" game and his Google IO talk in 2011
 
+var isRunning = true;
+
 window.requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
             window.webkitRequestAnimationFrame ||
@@ -7,7 +9,9 @@ window.requestAnimFrame = (function () {
             window.oRequestAnimationFrame ||
             window.msRequestAnimationFrame ||
             function (/* function */ callback, /* DOMElement */ element) {
-                window.setTimeout(callback, 1000 / 60);
+                if (isRunning) {
+                    window.setTimeout(callback, 1000 / 60);
+                }
             };
 })();
 
@@ -107,10 +111,12 @@ class GameEngine {
         }
     }
     loop() {
-        this.clockTick = this.timer.tick();
-        var loops = PARAMS.updatesPerDraw;
-        while (loops-- > 0) this.update();
-        this.draw();
+        if (isRunning) {
+            this.clockTick = this.timer.tick();
+            var loops = PARAMS.updatesPerDraw;
+            while (loops-- > 0) this.update();
+            this.draw();
+        }
     }
 };
 

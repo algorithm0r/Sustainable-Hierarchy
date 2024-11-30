@@ -11,11 +11,12 @@ class DataManager {
 
         // Initialize the Histogram instance for visualization
         let graphX = 50;
-        gameEngine.addGraph(new Graph(graphX, 0, [this.fishPopulation], "Fish"));
-        gameEngine.addGraph(new Graph(graphX, 150, [this.humanPopulation], "Humans"));
-        gameEngine.addGraph(new Graph(graphX, 300, [this.humanSupply], "Human Supply"));
-        gameEngine.addGraph(new Graph(graphX, 450, [this.humanEnergy], "Human Energy"));
-        gameEngine.addGraph(new Graph(graphX, 600, [this.humanAveEnergy], "Average Human Energy"));
+        let graphY = 10;
+        gameEngine.addGraph(new Graph(graphX, 0 + graphY, [this.fishPopulation], "Fish"));
+        gameEngine.addGraph(new Graph(graphX, 150 + graphY, [this.humanPopulation], "Humans"));
+        gameEngine.addGraph(new Graph(graphX, 300 + graphY, [this.humanSupply], "Human Supply"));
+        gameEngine.addGraph(new Graph(graphX, 450 + graphY, [this.humanEnergy], "Human Energy"));
+        gameEngine.addGraph(new Graph(graphX, 600 + graphY, [this.humanAveEnergy], "Average Human Energy"));
     }
 
 

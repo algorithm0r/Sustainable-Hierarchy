@@ -22,6 +22,7 @@ if (window.io !== undefined) {
 }
 
 function reset() {
+    isRunning = true;
 	loadParameters();
 	gameEngine.entities = [];
 	gameEngine.graphs = [];
@@ -33,6 +34,10 @@ function harvest() {
 	for (let pond of gameEngine.automata.ponds) {
 	    pond.harvest(.1);
 	}
+};
+
+function pause() {
+    isRunning = !isRunning;
 };
 
 ASSET_MANAGER.downloadAll(function () {

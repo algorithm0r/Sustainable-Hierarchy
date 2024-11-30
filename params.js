@@ -1,6 +1,6 @@
 var PARAMS = {
     // sim
-    updatesPerDraw: 20,
+    updatesPerDraw: 100,
 
     // automata
     pixelDimension: 800,
@@ -30,15 +30,17 @@ var PARAMS = {
     minFish: 100,
     pondCapacity: 6000,
     initialFish: 1000,
-    fishGrowth: .0003,
+    fishGrowth: .0001,
     fishEnergy: 5,
+    fishingDifficulty: 60,
 
     // humans
     initialHumans: 10,
     initialEnergy: 60,
     deathThreshold: 0,
-    reproductionThreshold: 80,
-    eatThreshold: 90,
+    reproductionThreshold: 90,
+    energyEatThreshold: 90,
+    supplyEatThreshold: 1,
     ratioEnergyToOffspring: .4,
     basicEnergyDepletion: .01,
 

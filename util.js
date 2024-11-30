@@ -61,24 +61,40 @@ function databaseDisconnected() {
 };
 
 function loadParameters() {
-    PARAMS.numRows = parseInt(document.getElementById("numRows").value);
-    PARAMS.numCols = parseInt(document.getElementById("numCols").value);
+//    PARAMS.numRows = parseInt(document.getElementById("numRows").value);
+//    PARAMS.numCols = parseInt(document.getElementById("numCols").value);
+//
+//    // Population parameters
+//    PARAMS.numOrganisms = parseInt(document.getElementById("numOrganisms").value);
+//    PARAMS.maxOffspring = parseInt(document.getElementById("maxOffspring").value);
+//    PARAMS.targetVariance = parseFloat(document.getElementById("targetVariance").value);
+//    PARAMS.initialVariation = parseFloat(document.getElementById("initialVariation").value);
+//    PARAMS.reproductionVariance = parseFloat(document.getElementById("reproductionVariance").value);
+//    PARAMS.populationSoftCap = parseInt(document.getElementById("populationSoftCap").value);
+//
+//    // Organism parameters
+//    PARAMS.numLocii = parseInt(document.getElementById("numLocii").value);
+//    PARAMS.mutationRate = parseFloat(document.getElementById("mutationRate").value);
+//    PARAMS.mutationRange = parseFloat(document.getElementById("mutationRange").value);
+//    PARAMS.deathChancePerGeneration = parseFloat(document.getElementById("deathChancePerGeneration").value);
+//    PARAMS.offspringMigrationChance = parseFloat(document.getElementById("offspringMigrationChance").value);
+//    PARAMS.adultMigrationChance = parseFloat(document.getElementById("adultMigrationChance").value);
 
-    // Population parameters
-    PARAMS.numOrganisms = parseInt(document.getElementById("numOrganisms").value);
-    PARAMS.maxOffspring = parseInt(document.getElementById("maxOffspring").value);
-    PARAMS.targetVariance = parseFloat(document.getElementById("targetVariance").value);
-    PARAMS.initialVariation = parseFloat(document.getElementById("initialVariation").value);
-    PARAMS.reproductionVariance = parseFloat(document.getElementById("reproductionVariance").value);
-    PARAMS.populationSoftCap = parseInt(document.getElementById("populationSoftCap").value);
+    PARAMS.minFish = parseInt(document.getElementById("minFish").value);
+    PARAMS.pondCapacity = parseInt(document.getElementById("pondCapacity").value);
+    PARAMS.initialFish = parseInt(document.getElementById("initialFish").value);
+    PARAMS.fishGrowth = parseFloat(document.getElementById("fishGrowth").value);
+    PARAMS.fishEnergy = parseInt(document.getElementById("fishEnergy").value);
+    PARAMS.fishingDifficulty = parseInt(document.getElementById("fishingDifficulty").value);
 
-    // Organism parameters
-    PARAMS.numLocii = parseInt(document.getElementById("numLocii").value);
-    PARAMS.mutationRate = parseFloat(document.getElementById("mutationRate").value);
-    PARAMS.mutationRange = parseFloat(document.getElementById("mutationRange").value);
-    PARAMS.deathChancePerGeneration = parseFloat(document.getElementById("deathChancePerGeneration").value);
-    PARAMS.offspringMigrationChance = parseFloat(document.getElementById("offspringMigrationChance").value);
-    PARAMS.adultMigrationChance = parseFloat(document.getElementById("adultMigrationChance").value);
+    PARAMS.initialHumans = parseInt(document.getElementById("initialHumans").value);
+    PARAMS.initialEnergy = parseInt(document.getElementById("initialEnergy").value);
+    PARAMS.deathThreshold = parseInt(document.getElementById("deathThreshold").value);
+    PARAMS.reproductionThreshold = parseInt(document.getElementById("reproductionThreshold").value);
+    PARAMS.energyEatThreshold = parseInt(document.getElementById("energyEatThreshold").value);
+    PARAMS.supplyEatThreshold = parseInt(document.getElementById("supplyEatThreshold").value);
+    PARAMS.ratioEnergyToOffspring = parseFloat(document.getElementById("ratioEnergyToOffspring").value);
+    PARAMS.basicEnergyDepletion = parseFloat(document.getElementById("basicEnergyDepletion").value);
     
     console.log(PARAMS);
 }
