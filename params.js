@@ -27,20 +27,20 @@ var PARAMS = {
     adultMigrationChance: 0.0001,
 
     // pond
-    minFish: 100,
-    pondCapacity: 6000,
-    initialFish: 1000,
-    fishGrowth: .0001,
-    fishEnergy: 5,
-    fishingDifficulty: 60,
+    minFish: 40,
+    pondCapacity: 2000,
+    initialFish: 100,
+    fishGrowth: .001,
+    fishEnergy: 6,
+    fishingDifficulty: 20,
 
     // humans
     initialHumans: 10,
-    initialEnergy: 60,
+    initialEnergy: 50,
     deathThreshold: 0,
     reproductionThreshold: 90,
     energyEatThreshold: 90,
-    supplyEatThreshold: 1,
+    supplyEatThreshold: 2,
     ratioEnergyToOffspring: .4,
     basicEnergyDepletion: .01,
 
