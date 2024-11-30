@@ -1,6 +1,6 @@
 var PARAMS = {
     // sim
-    updatesPerDraw: 1,
+    updatesPerDraw: 20,
 
     // automata
     pixelDimension: 800,
@@ -26,9 +26,22 @@ var PARAMS = {
     offspringMigrationChance: 0.0001, // offspring migration
     adultMigrationChance: 0.0001,
 
+    // pond
+    minFish: 100,
+    pondCapacity: 5000,
+    initialFish: 1000,
+    fishGrowth: .0001,
+    fishEnergy: 1,
+
+    // humans
+    initialHumans: 10,
+    deathThreshold: 0,
+    reproductionThreshold: 80,
+
+
     // data gathering
     histogramWidth: 5,
-    reportingPeriod: 50,
+    reportingPeriod: 100,
     epoch: 150000,
 
     // database

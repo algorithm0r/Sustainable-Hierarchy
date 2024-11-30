@@ -2,6 +2,8 @@ var gameEngine = new GameEngine();
 
 var ASSET_MANAGER = new AssetManager();
 
+
+
 var socket = null;
 if (window.io !== undefined) {
 	console.log("Database connected!");
@@ -22,7 +24,15 @@ if (window.io !== undefined) {
 function reset() {
 	loadParameters();
 	gameEngine.entities = [];
+	gameEngine.graphs = [];
 	new Automata();
+};
+
+
+function harvest() {
+	for (let pond of gameEngine.automata.ponds) {
+	    pond.harvest(.1);
+	}
 };
 
 ASSET_MANAGER.downloadAll(function () {

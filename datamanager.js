@@ -2,58 +2,27 @@ class DataManager {
     constructor(automata) {
         this.automata = automata;
 
-        // Store histograms over time
-        this.geneticHistogramData = [];
+        // population data
+        this.fishPopulation = [];
 
         // Initialize the Histogram instance for visualization
-        gameEngine.addGraph(new Histogram(800, 0, this.geneticHistogramData, "Genetic Distribution"));
+        gameEngine.addGraph(new Graph(800, 0, [this.fishPopulation], "Fish"));
     }
 
-    createGeneHistogram() {
-        const bucketCount = 20;
-        const minRange = -PARAMS.histogramWidth;
-        const maxRange = PARAMS.histogramWidth;
-        const bucketSize = (maxRange - minRange) / bucketCount;
-
-        let histogram = Array(bucketCount).fill(0);
-
-        for (const organism of this.automata.grid[0][0].currentPopulation) {
-            for (const gene of organism.genes) {
-                let value = gene.value;
-                let index = Math.floor((value - minRange) / bucketSize);
-
-                if (index < 0) index = 0;
-                else if (index >= bucketCount) index = bucketCount - 1;
-
-                histogram[index]++;
-            }
-        }
-
-        // const maxCount = Math.max(...histogram);
-        // const normalizedHistogram = histogram.map(count => count / maxCount);
-
-        return histogram;
-    }
 
     updateData() {
-        // Generate a new histogram for the current population
-        const newHistogram = this.createGeneHistogram();
-        
+        let fishPop = 0;
+
+        for (let pond of this.automata.ponds) {
+            let numFish = pond.numFish;
+            fishPop += numFish
+        }
+
         // Append the new histogram to the geneticHistogramData for time-series tracking
-        this.geneticHistogramData.push(newHistogram);
+        this.fishPopulation.push(fishPop);
     }
 
     logData() {
-        const data = {
-            db: PARAMS.db,
-            collection: PARAMS.collection,
-            data: {
-                PARAMS: PARAMS,
-                geneticHistogramData: this.geneticHistogramData
-            }
-        };
-
-        if (socket) socket.emit("insert", data);
     }
 
     update() {

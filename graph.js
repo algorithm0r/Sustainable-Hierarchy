@@ -1,14 +1,14 @@
 class Graph {
-    constructor(game, x, y, data, label) {
-        this.game = game;
+    constructor(x, y, data, label) {
+//        this.game = game;
         this.x = x;
         this.y = y;
         this.data = data;
         this.label = label;
 
-        this.xSize = 600;
+        this.xSize = 400;
         this.ySize = 135;
-        this.ctx = game.ctx;
+        this.ctx = gameEngine.ctx;
         this.colors = ["#00BB00", "#BB0000", "#00BBBB", "#CCCCCC"];
         this.maxVal = 0;
     }
@@ -47,16 +47,19 @@ class Graph {
 
                 this.ctx.strokeStyle = "#000000";
                 this.ctx.fillSytle = "#000000";
-                this.ctx.fillText(data[data.length - 1], this.x + this.xSize + 5, yPos + 10);
-
+                this.ctx.textAlign = "right";
+                this.ctx.fillText(data[data.length - 1], this.x + this.xSize - 5, yPos + 10);
             }
         }
         var firstTick = 0;
         firstTick = this.data[0].length > this.xSize ? this.data[0].length - this.xSize : 0;
-        this.ctx.fillText(firstTick * PARAMS.reportingPeriod, this.x, this.y + this.ySize + 10);
+        this.ctx.fillStyle = "#000000";
+        this.ctx.textAlign = "left";
+        this.ctx.fillText(firstTick * PARAMS.reportingPeriod, this.x + 5, this.y + this.ySize + 10);
         this.ctx.textAlign = "right";
-        this.ctx.fillText(this.data[0].length - 1, this.x + this.xSize - 5, this.y + this.ySize + 10);
-
+        this.ctx.fillText((this.data[0].length - 1)* PARAMS.reportingPeriod, this.x + this.xSize - 5, this.y + this.ySize + 10);
+        this.ctx.textAlign = "center";
+        this.ctx.fillText(this.label, this.x + this.xSize / 2, this.y + this.ySize + 10);
         this.ctx.strokeStyle = "#000000";
         this.ctx.lineWidth = 1;
         this.ctx.strokeRect(this.x, this.y, this.xSize, this.ySize);
