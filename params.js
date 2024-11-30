@@ -28,15 +28,18 @@ var PARAMS = {
 
     // pond
     minFish: 100,
-    pondCapacity: 5000,
+    pondCapacity: 6000,
     initialFish: 1000,
-    fishGrowth: .0001,
-    fishEnergy: 1,
+    fishGrowth: .0003,
+    fishEnergy: 5,
 
     // humans
     initialHumans: 10,
+    initialEnergy: 60,
     deathThreshold: 0,
     reproductionThreshold: 80,
+    eatThreshold: 10,
+    ratioEnergyToOffspring: .4,
 
 
     // data gathering
