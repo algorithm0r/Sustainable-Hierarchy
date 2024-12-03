@@ -19,4 +19,8 @@ class Pond {
     harvest(proportion) {
         this.numFish *= (1-proportion);
     }
+
+    isFull() {
+        return this.numFish > (PARAMS.pondCapacity * PARAMS.fullPondThreshold);
+    }
 }

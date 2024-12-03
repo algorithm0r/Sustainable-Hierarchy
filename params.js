@@ -1,6 +1,6 @@
 var PARAMS = {
     // sim
-    updatesPerDraw: 100,
+    updatesPerDraw: 500,
 
     // automata
     pixelDimension: 800,
@@ -33,21 +33,32 @@ var PARAMS = {
     fishGrowth: .001,
     fishEnergy: 6,
     fishingDifficulty: 20,
+    fullPondThreshold: .5,
+
 
     // humans
-    initialHumans: 10,
+    initialHumans: 100,
     initialEnergy: 50,
     deathThreshold: 0,
+    maxEnergy: 100,
     reproductionThreshold: 90,
     energyEatThreshold: 90,
     supplyEatThreshold: 2,
     ratioEnergyToOffspring: .4,
     basicEnergyDepletion: .01,
+    hungerThreshold: 30,
+    broadcastLearning: false,
+    metabolismDiminishingReturns: 20,
+
+
+    qLearningRate: 0.5,
+    qLearningDiscount: 0.5,
+    defaultQValue: 0,
 
 
     // data gathering
     histogramWidth: 5,
-    reportingPeriod: 100,
+    reportingPeriod: 500,
     epoch: 150000,
 
     // database

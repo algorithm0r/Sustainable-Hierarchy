@@ -7,6 +7,10 @@ function randomFloat(min, max) {
     return Math.random() * (max - min) + min;
 }
 
+function logBase(base, x) {
+    return Math.log(x) / Math.log(base);
+}
+
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));

@@ -1,10 +1,11 @@
 class Graph {
-    constructor(x, y, data, label) {
+    constructor(x, y, data, label, sublabels = []) {
 //        this.game = game;
         this.x = x;
         this.y = y;
         this.data = data;
         this.label = label;
+        this.sublabels = sublabels;
 
         this.xSize = 1100;
         this.ySize = 135;
@@ -46,9 +47,14 @@ class Graph {
                 this.ctx.closePath();
 
                 this.ctx.strokeStyle = "#000000";
-                this.ctx.fillSytle = "#000000";
+                this.ctx.fillStyle = "#000000";
                 this.ctx.textAlign = "right";
                 this.ctx.fillText(data[data.length - 1], this.x + this.xSize - 5, yPos + 10);
+                if (this.sublabels.length > 0) {
+                    this.ctx.strokeStyle = this.colors[j];
+                    this.ctx.fillStyle = this.colors[j];
+                    this.ctx.fillText(this.sublabels[j], this.x + this.xSize - 5, yPos + 20);
+                }
             }
         }
         var firstTick = 0;

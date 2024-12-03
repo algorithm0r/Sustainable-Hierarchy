@@ -5,18 +5,22 @@ class DataManager {
         // population data
         this.fishPopulation = [];
         this.humanPopulation = [];
-        this.humanSupply = [];
-        this.humanEnergy = [];
+        this.humanAveSupply = [];
         this.humanAveEnergy = [];
+
+        this.nullActions = [];
+        this.fishActions = [];
+        this.eatActions = [];
+        this.reproduceActions = [];
 
         // Initialize the Histogram instance for visualization
         let graphX = 50;
         let graphY = 10;
         gameEngine.addGraph(new Graph(graphX, 0 + graphY, [this.fishPopulation], "Fish"));
         gameEngine.addGraph(new Graph(graphX, 150 + graphY, [this.humanPopulation], "Humans"));
-        gameEngine.addGraph(new Graph(graphX, 300 + graphY, [this.humanSupply], "Human Supply"));
-        gameEngine.addGraph(new Graph(graphX, 450 + graphY, [this.humanEnergy], "Human Energy"));
-        gameEngine.addGraph(new Graph(graphX, 600 + graphY, [this.humanAveEnergy], "Average Human Energy"));
+        gameEngine.addGraph(new Graph(graphX, 300 + graphY, [this.humanAveSupply], "Average Human Supply"));
+        gameEngine.addGraph(new Graph(graphX, 450 + graphY, [this.humanAveEnergy], "Average Human Energy"));
+        gameEngine.addGraph(new Graph(graphX, 600 + graphY, [this.nullActions, this.fishActions, this.eatActions, this.reproduceActions], "Actions", ["null", "fish", "eat", "reproduce"]));
     }
 
 
@@ -26,23 +30,24 @@ class DataManager {
         let humanPop = this.automata.humans.length;
         this.humanPopulation.push(humanPop);
 
-
         let humanSupply = 0;
         for (let human of this.automata.humans) {
             let sply = human.supply;
             humanSupply += sply;
         }
-        this.humanSupply.push(humanSupply);
+        this.humanAveSupply.push(humanSupply / humanPop);
 
         let humanEnergy = 0;
         for (let human of this.automata.humans) {
             let engy = human.energy;
             humanEnergy += engy;
         }
-        this.humanEnergy.push(humanEnergy);
         this.humanAveEnergy.push(humanEnergy / humanPop);
 
-
+        this.nullActions.push(this.automata.humans.filter(human => human.lastAction == 0).length);
+        this.fishActions.push(this.automata.humans.filter(human => human.lastAction == 1).length);
+        this.eatActions.push(this.automata.humans.filter(human => human.lastAction == 2).length);
+        this.reproduceActions.push(this.automata.humans.filter(human => human.lastAction == 3).length);
     }
 
     logData() {

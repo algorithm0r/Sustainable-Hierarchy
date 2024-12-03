@@ -14,6 +14,8 @@
     <script type="text/javascript" src="./gene.js"></script>
     <script type="text/javascript" src="./automata.js"></script>
     <script type="text/javascript" src="./human.js"></script>
+    <script type="text/javascript" src="./humanQ.js"></script>
+    <script type="text/javascript" src="./qLearner.js"></script>
     <script type="text/javascript" src="./pond.js"></script>
     <script type="text/javascript" src="./datamanager.js"></script>
     <script type="text/javascript" src="./main.js"></script>
@@ -24,21 +26,6 @@
         <div id="db" class="db-status">Database</div>
         <div id="parameters">
             <p>Simulation Parameters</p>
-
-<!--            <div class="parameter-section">-->
-<!--                <h3>Initial Parameters</h3>-->
-<!--&lt;!&ndash;                <label for="numRows">Number of Rows:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="number" id="numRows" value="8" /><br />&ndash;&gt;-->
-
-<!--&lt;!&ndash;                <label for="numCols">Number of Columns:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="number" id="numCols" value="8" /><br />&ndash;&gt;-->
-
-<!--                <label for="numOrganisms">Initial Population Size:</label>-->
-<!--                <input type="number" id="numOrganisms" value="100" /><br />-->
-
-<!--                <label for="initialVariation">Initial Genetic Variation (std dev):</label>-->
-<!--                <input type="number" id="initialVariation" value="1" /><br />-->
-<!--            </div>-->
 
             <div class="parameter-section">
                 <h3>Fish Parameters</h3>
@@ -55,17 +42,17 @@
                 <label for="fishGrowth">Fish Growth Rate:</label>
                 <input type="number" id="fishGrowth" value=".001" /><br />
 
-                <label for="fishEnergy">Fish Food Energy Value (>= 1):</label>
-                <input type="number" id="fishEnergy" value="6" step="1" /><br />
+                <label for="fishEnergy">Fish Food Energy Value (0 - 100):</label>
+                <input type="number" id="fishEnergy" value="60" step="1" /><br />
 
                 <label for="fishingDifficulty">Fishing Difficulty:</label>
-                <input type="number" id="fishingDifficulty" value="20"/><br />
+                <input type="number" id="fishingDifficulty" value="100"/><br />
             </div>
 
             <div class="parameter-section">
                 <h3>Human Parameters</h3>
                 <label for="initialHumans">Initial Humans:</label>
-                <input type="number" id="initialHumans" value="10" /><br />
+                <input type="number" id="initialHumans" value="100" /><br />
 
                 <label for="initialEnergy">Initial Energy (0 - 100):</label>
                 <input type="number" id="initialEnergy" value="50" step="10" /><br />
@@ -80,13 +67,13 @@
                 <input type="number" id="energyEatThreshold" value="90" step="5" /><br />
 
                 <label for="supplyEatThreshold">Only eat when has at least _ fish:</label>
-                <input type="number" id="supplyEatThreshold" value="2" step="1" /><br />
+                <input type="number" id="supplyEatThreshold" value="1" step="1" /><br />
 
                 <label for="ratioEnergyToOffspring">Energy Sacrificed to Offspring (0 - 1):</label>
                 <input type="number" id="ratioEnergyToOffspring" value="0.4" step="0.1" /><br />
 
                 <label for="basicEnergyDepletion">Energy Depletion Per Turn:</label>
-                <input type="number" id="basicEnergyDepletion" value="0.01" step="0.002" /><br />
+                <input type="number" id="basicEnergyDepletion" value="0.03" step="0.002" /><br />
             </div>
 
             <button type="button" onclick="reset()">Reset Simulation</button>

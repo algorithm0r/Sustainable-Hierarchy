@@ -4,7 +4,7 @@ class Automata {
         gameEngine.addEntity(this);
         this.generation = 0;
         this.ponds = [new Pond()];
-        this.humans = Array.from({ length: PARAMS.initialHumans}, (_, index) => new Human());
+        this.humans = Array.from({ length: PARAMS.initialHumans}, (_, index) => new HumanQ());
 
 
 
