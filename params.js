@@ -1,6 +1,6 @@
 var PARAMS = {
     // sim
-    updatesPerDraw: 500,
+    updatesPerDraw: 100,
 
     // automata
     pixelDimension: 800,
@@ -37,7 +37,7 @@ var PARAMS = {
 
 
     // humans
-    initialHumans: 100,
+    initialHumans: 10,
     initialEnergy: 50,
     deathThreshold: 0,
     maxEnergy: 100,
@@ -46,9 +46,10 @@ var PARAMS = {
     supplyEatThreshold: 2,
     ratioEnergyToOffspring: .4,
     basicEnergyDepletion: .01,
-    hungerThreshold: 30,
+    hungerThreshold: 50,
     broadcastLearning: false,
     metabolismDiminishingReturns: 20,
+    epsilonDecay: 0.9999,
 
 
     qLearningRate: 0.5,
@@ -58,7 +59,7 @@ var PARAMS = {
 
     // data gathering
     histogramWidth: 5,
-    reportingPeriod: 500,
+    reportingPeriod: 100,
     epoch: 150000,
 
     // database

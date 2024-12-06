@@ -31,22 +31,22 @@
                 <h3>Fish Parameters</h3>
 
                 <label for="minFish">Minimum Fish:</label>
-                <input type="number" id="minFish" value="40" /><br />
+                <input type="number" id="minFish" value="20" /><br />
 
                 <label for="pondCapacity">Pond Capacity:</label>
-                <input type="number" id="pondCapacity" value="2000" /><br />
+                <input type="number" id="pondCapacity" value="1000" /><br />
 
                 <label for="initialFish">Initial Fish:</label>
                 <input type="number" id="initialFish" value="100" /><br />
 
                 <label for="fishGrowth">Fish Growth Rate:</label>
-                <input type="number" id="fishGrowth" value=".001" /><br />
+                <input type="number" id="fishGrowth" value=".003" /><br />
 
                 <label for="fishEnergy">Fish Food Energy Value (0 - 100):</label>
-                <input type="number" id="fishEnergy" value="60" step="1" /><br />
+                <input type="number" id="fishEnergy" value="20" step="1" /><br />
 
                 <label for="fishingDifficulty">Fishing Difficulty:</label>
-                <input type="number" id="fishingDifficulty" value="100"/><br />
+                <input type="number" id="fishingDifficulty" value="20"/><br />
             </div>
 
             <div class="parameter-section">
@@ -73,7 +73,10 @@
                 <input type="number" id="ratioEnergyToOffspring" value="0.4" step="0.1" /><br />
 
                 <label for="basicEnergyDepletion">Energy Depletion Per Turn:</label>
-                <input type="number" id="basicEnergyDepletion" value="0.03" step="0.002" /><br />
+                <input type="number" id="basicEnergyDepletion" value="0.025" step="0.002" /><br />
+
+                <label for="epsilonDecay">Epsilon Decay:</label>
+                <input type="number" id="epsilonDecay" value="0.9999" /><br />
             </div>
 
             <button type="button" onclick="reset()">Reset Simulation</button>

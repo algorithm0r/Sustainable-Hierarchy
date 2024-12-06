@@ -99,7 +99,8 @@ function loadParameters() {
     PARAMS.supplyEatThreshold = parseInt(document.getElementById("supplyEatThreshold").value);
     PARAMS.ratioEnergyToOffspring = parseFloat(document.getElementById("ratioEnergyToOffspring").value);
     PARAMS.basicEnergyDepletion = parseFloat(document.getElementById("basicEnergyDepletion").value);
-    
+    PARAMS.epsilonDecay = parseFloat(document.getElementById("epsilonDecay").value);
+
     console.log(PARAMS);
 }
 

@@ -17,11 +17,9 @@ class HumanQ {
 //        let actions = ["null", "fish", "eat", "reproduce"];
         let actions = ["null", "fish", "eat"];
         this.lastAction = 0;
-        console.log(qLearner == null);
         this.learner = qLearner == null ? new QLearner(actions) : qLearner;
 
         this.epsilon = 1;
-        this.epsilonDecay = 0.99;
     }
 
     spendEnergy() {
@@ -50,7 +48,7 @@ class HumanQ {
     }
 
     fish() {
-        let reward = this.spendEnergy() * 300;
+        let reward = this.spendEnergy() * 30;
 
         let numFish = gameEngine.automata.ponds[0].numFish;
         let fishAvailability = (numFish / PARAMS.pondCapacity) / PARAMS.fishingDifficulty;
@@ -117,6 +115,7 @@ class HumanQ {
         }
     }
 
+    // todo fix infiinite recursive call in broadcast
     broadcast(state, action, reward, nextState) {
         gameEngine.automata.humans.forEach(human => {
             human.learner.learn(state, action, reward, nextState);
@@ -141,9 +140,15 @@ class HumanQ {
         let nextState = gameEngine.automata.ponds[0].isFull() ? "1" : "0";
         nextState = this.selfState(nextState);
 
+        if (this.energy < PARAMS.deathThreshold) {
+            this.reward -= 1000;
+        }
+        this.learn(state, action, reward, nextState);
 
-        this.epsilon *= this.epsilonDecay;
+        this.epsilon *= PARAMS.epsilonDecay;
     }
+
+    // TODO: IF A HUMAN DIES, THAT SHOULD BE BROADCASTED!!
 
     act(action) {
         this.lastAction = action;
@@ -164,7 +169,16 @@ class HumanQ {
 
         if (this.energy < PARAMS.deathThreshold) {
             this.removeFromWorld = true;
+
+            console.log("adding baby")
+            let baby = new HumanQ(
+                gameEngine.automata.lastHumanId + 1,
+                50,
+                this.copyLearner(),
+            );
+            gameEngine.automata.humans.push(baby);
         }
+
     }
 
     draw(ctx) {
