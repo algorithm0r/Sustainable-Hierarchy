@@ -32,7 +32,7 @@ function reset() {
 
 function harvest() {
 	for (let pond of gameEngine.automata.ponds) {
-	    pond.harvest(.1);
+	    pond.harvest(.4);
 	}
 };
 
