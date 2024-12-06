@@ -13,14 +13,17 @@ class DataManager {
         this.eatActions = [];
         this.reproduceActions = [];
 
+        this.qlearners = [];
+
         // Initialize the Histogram instance for visualization
         let graphX = 50;
         let graphY = 10;
         gameEngine.addGraph(new Graph(graphX, 0 + graphY, [this.fishPopulation], "Fish"));
-        gameEngine.addGraph(new Graph(graphX, 150 + graphY, [this.humanPopulation], "Humans"));
-        gameEngine.addGraph(new Graph(graphX, 300 + graphY, [this.humanAveSupply], "Average Human Supply"));
-        gameEngine.addGraph(new Graph(graphX, 450 + graphY, [this.humanAveEnergy], "Average Human Energy"));
-        gameEngine.addGraph(new Graph(graphX, 600 + graphY, [this.nullActions, this.fishActions, this.eatActions, this.reproduceActions], "Actions", ["null", "fish", "eat", "reproduce"]));
+        gameEngine.addGraph(new Graph(graphX, 130 + graphY, [this.humanPopulation], "Humans"));
+        gameEngine.addGraph(new Graph(graphX, 260 + graphY, [this.humanAveSupply], "Average Human Supply"));
+        gameEngine.addGraph(new Graph(graphX, 390 + graphY, [this.humanAveEnergy], "Average Human Energy"));
+        gameEngine.addGraph(new Graph(graphX, 520 + graphY, [this.nullActions, this.fishActions, this.eatActions, this.reproduceActions], "Actions", ["null", "fish", "eat", "reproduce"]));
+        gameEngine.addGraph(new QValueViewer(graphX, 650 + graphY, "Q Values"));
     }
 
 
@@ -48,6 +51,7 @@ class DataManager {
         this.fishActions.push(this.automata.humans.filter(human => human.lastAction == 1).length);
         this.eatActions.push(this.automata.humans.filter(human => human.lastAction == 2).length);
         this.reproduceActions.push(this.automata.humans.filter(human => human.lastAction == 3).length);
+
     }
 
     logData() {

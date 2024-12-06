@@ -64,6 +64,7 @@ function databaseDisconnected() {
     dbDiv.classList.add("db-disconnected");
 };
 
+
 function loadParameters() {
 //    PARAMS.numRows = parseInt(document.getElementById("numRows").value);
 //    PARAMS.numCols = parseInt(document.getElementById("numCols").value);
