@@ -24,6 +24,7 @@ class DataManager {
         gameEngine.addGraph(new Graph(graphX, 390 + graphY, [this.humanAveEnergy], "Average Human Energy"));
         gameEngine.addGraph(new Graph(graphX, 520 + graphY, [this.nullActions, this.fishActions, this.eatActions, this.reproduceActions], "Actions", ["null", "fish", "eat", "reproduce"]));
         gameEngine.addGraph(new QValueViewer(graphX, 650 + graphY, "Q Values"));
+        gameEngine.addGraph(new VariableViewer(graphX, 820 + graphY, "Variables", () => ({"total_deaths": this.automata.totalDeaths })));
     }
 
 
@@ -51,6 +52,8 @@ class DataManager {
         this.fishActions.push(this.automata.humans.filter(human => human.lastAction == 1).length);
         this.eatActions.push(this.automata.humans.filter(human => human.lastAction == 2).length);
         this.reproduceActions.push(this.automata.humans.filter(human => human.lastAction == 3).length);
+
+
 
     }
 

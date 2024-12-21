@@ -6,7 +6,8 @@ class HumanQ {
     constructor(
         id = Human.lastHumanId + 1,
         energy = PARAMS.initialEnergy,
-        qLearner = null
+        qLearner = new QLearner(["null", "fish", "eat", "reproduce"]),
+        sexualDriveGene = new RealGene(null),
     ) {
         this.id = id;
         Human.lastHumanId = id;
@@ -15,9 +16,10 @@ class HumanQ {
         this.supply = 0;
 
 //        let actions = ["null", "fish", "eat", "reproduce"];
-        let actions = ["null", "fish", "eat"];
+//         let actions = ["null", "fish", "eat"];
         this.lastAction = 0;
-        this.learner = qLearner == null ? new QLearner(actions) : qLearner;
+        this.learner = qLearner;
+        this.sexualDriveGene = sexualDriveGene;
 
         this.epsilon = 1;
     }
@@ -50,9 +52,17 @@ class HumanQ {
     fish() {
         let reward = this.spendEnergy() * 30;
 
+        // random chance of catching 1 fish
+        // let numFish = gameEngine.automata.ponds[0].numFish;
+        // let fishAvailability = (numFish / PARAMS.pondCapacity) / PARAMS.fishingDifficulty;
+        // if ((numFish > PARAMS.minFish) && (randomFloat(0, 1) > 1 - fishAvailability)) {
+        //     gameEngine.automata.ponds[0].numFish -= 1;
+        //     this.supply += 1;
+        // }
+
+        // catch # fish proportional to pond
         let numFish = gameEngine.automata.ponds[0].numFish;
-        let fishAvailability = (numFish / PARAMS.pondCapacity) / PARAMS.fishingDifficulty;
-        if ((numFish > PARAMS.minFish) && (randomFloat(0, 1) > 1 - fishAvailability)) {
+        if (numFish > PARAMS.minFish) {
             gameEngine.automata.ponds[0].numFish -= 1;
             this.supply += 1;
         }
@@ -71,23 +81,37 @@ class HumanQ {
             let energyFromFood = gap / 100 * PARAMS.fishEnergy;
             this.energy += energyFromFood;
             reward += energyFromFood;
-        } else {
-            console.assert("cannot eat when has no supply!");
+        // } else {
+        //     console.log("cannot eat when has no supply!");
         }
         return reward;
     }
 
     reproduce() {
-        let spentEnergy = this.energy * (1 - PARAMS.ratioEnergyToOffspring);
-        let reward = -spentEnergy;
+        let reward = this.spendEnergy();
+        if (this.energy >= PARAMS.reproductionThreshold) {
 
-        let baby = new HumanQ(
-            gameEngine.automata.lastHumanId + 1,
-            this.energy * PARAMS.ratioEnergyToOffspring,
-            this.copyLearner(),
-        );
-        gameEngine.automata.humans.push(baby);
+            let offspringGene = new RealGene(this.sexualDriveGene);
+            offspringGene.mutate();
+
+            let baby = new HumanQ (
+                gameEngine.automata.lastHumanId + 1,
+                this.energy * PARAMS.ratioEnergyToOffspring,
+                this.copyLearner(),
+                offspringGene,
+            );
+            gameEngine.automata.humans.push(baby);
+
+            let spentEnergy = this.energy * PARAMS.ratioEnergyToOffspring;
+            this.energy -= spentEnergy;
+            reward -= spentEnergy;
+            reward += this.calculateSexualDrive();
+        }
         return reward;
+    }
+
+    calculateSexualDrive() {
+        return this.sexualDriveGene.value * PARAMS.sexualDriveMultiplier;
     }
 
     copyLearner() {
@@ -170,15 +194,15 @@ class HumanQ {
         if (this.energy < PARAMS.deathThreshold) {
             this.removeFromWorld = true;
 
-            console.log("adding baby")
-            let baby = new HumanQ(
-                gameEngine.automata.lastHumanId + 1,
-                50,
-                this.copyLearner(),
-            );
-            gameEngine.automata.humans.push(baby);
+            // logic to simply replace dead human with new one
+            // console.log("adding baby")
+            // let baby = new HumanQ(
+            //     gameEngine.automata.lastHumanId + 1,
+            //     50,
+            //     this.copyLearner(),
+            // );
+            // gameEngine.automata.humans.push(baby);
         }
-
     }
 
     draw(ctx) {

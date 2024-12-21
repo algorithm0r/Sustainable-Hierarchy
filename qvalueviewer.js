@@ -6,7 +6,7 @@ class QValueViewer {
         this.label = label;
 
         this.xSize = 1100;
-        this.ySize = 135;
+        this.ySize = 175;
         this.ctx = gameEngine.ctx;
         this.colors = ["#00BB00", "#BB0000", "#00BBBB", "#CCCCCC"];
         this.maxVal = 0;
@@ -55,7 +55,6 @@ class QValueViewer {
 
             // Update the y position for the next variable
             startY += lineHeight;
-            startX
 
             // Break the loop if the box height is exceeded
             if (startY > this.y + this.ySize - 10) {

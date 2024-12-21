@@ -5,7 +5,7 @@ class Automata {
         this.generation = 0;
         this.ponds = [new Pond()];
         this.humans = Array.from({ length: PARAMS.initialHumans}, (_, index) => new HumanQ());
-
+        this.totalDeaths = 0;
 
 
         gameEngine.addEntity(new DataManager(this));
@@ -22,6 +22,7 @@ class Automata {
         for (var i = this.humans.length - 1; i >= 0; --i) {
             if (this.humans[i].removeFromWorld) {
                 this.humans.splice(i, 1);
+                this.totalDeaths++
             }
         }
 

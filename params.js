@@ -9,7 +9,7 @@ var PARAMS = {
 
     // population
     numOrganisms: 100,
-    initialVariation: 1,
+    initialVariation: .3,
     maxOffspring: 5,
     targetValue: 0,
     targetVariance: 5,
@@ -50,10 +50,12 @@ var PARAMS = {
     broadcastLearning: false,
     metabolismDiminishingReturns: 20,
     epsilonDecay: 0.9999,
+    preventHumanExtinction: false,
+    sexualDriveMultiplier: 100,
 
 
     qLearningRate: 0.5,
-    qLearningDiscount: 0.5,
+    qLearningDiscount: 0.2,
     defaultQValue: 0,
 
 
