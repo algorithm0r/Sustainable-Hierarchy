@@ -1,7 +1,7 @@
 class Histogram {
     constructor(x, y, data, label) {
-        this.xSize = 400;
-        this.ySize = 80;
+        this.xSize = 570;
+        this.ySize = 120;
         this.x = x;
         this.y = y;
         this.label = label;
@@ -11,21 +11,25 @@ class Histogram {
     }
     update() {
     }
+
     draw(ctx) {
         if (!document.getElementById("graphs").checked) return;
         var length = this.data.length > (this.xSize) ?
             Math.floor(this.xSize) : this.data.length;
         var start = this.data.length > (this.xSize) ?
             this.data.length - (this.xSize) : 0;
+        let maxVals = [];
         for (var i = 0; i < length; i++) {
             var maxVal = this.data[i + start].reduce(function (acc, x) {
                 return acc + x;
             }, 0);
+            maxVals.push(maxVal);
             for (var j = 0; j < this.data[i + start].length; j++) {
 
                 this.fill(this.data[i + start][j] / maxVal, i, 19 - j);
             }
         }
+        console.log(maxVals);
         this.ctx.fillStyle = "#000000";
         this.ctx.textAlign = "center";
         this.ctx.fillText(this.label, this.x + this.xSize / 2, this.y + this.ySize + 10);
@@ -55,6 +59,7 @@ class Histogram {
             width,
             height);
     }
+
 };
 
 

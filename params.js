@@ -44,14 +44,14 @@ var PARAMS = {
     reproductionThreshold: 90,
     energyEatThreshold: 90,
     supplyEatThreshold: 2,
-    ratioEnergyToOffspring: .4,
+    ratioEnergyToOffspring: .5,
     basicEnergyDepletion: .01,
     hungerThreshold: 50,
     broadcastLearning: false,
     metabolismDiminishingReturns: 20,
     epsilonDecay: 0.9999,
     preventHumanExtinction: false,
-    sexualDriveMultiplier: 100,
+    sexualDriveMultiplier: 60,
 
 
     qLearningRate: 0.5,

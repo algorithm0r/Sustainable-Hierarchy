@@ -87,7 +87,7 @@ class GameEngine {
 //            this.entities[i].draw(this.ctx);
 //        }
         if (this.automata.generation % PARAMS.reportingPeriod === 0) {
-            this.ctx.clearRect(50, 0, this.ctx.canvas.width - 50, this.ctx.canvas.height); // clear graphs only
+            this.ctx.clearRect(20, 0, this.ctx.canvas.width - 20, this.ctx.canvas.height); // clear graphs only
             for (var i = 0; i < this.graphs.length; i++) {
                 this.graphs[i].draw(this.ctx);
             }

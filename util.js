@@ -103,6 +103,7 @@ function loadParameters() {
     PARAMS.ratioEnergyToOffspring = parseFloat(document.getElementById("ratioEnergyToOffspring").value);
     PARAMS.basicEnergyDepletion = parseFloat(document.getElementById("basicEnergyDepletion").value);
     PARAMS.hungerThreshold = parseInt(document.getElementById("hungerThreshold").value);
+    PARAMS.sexualDriveMultiplier = parseInt(document.getElementById("sexualDriveMultiplier").value);
 
     PARAMS.epsilonDecay = parseFloat(document.getElementById("epsilonDecay").value);
     PARAMS.qLearningRate = parseFloat(document.getElementById("qLearningRate").value);

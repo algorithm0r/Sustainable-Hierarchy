@@ -53,19 +53,19 @@ class HumanQ {
         let reward = this.spendEnergy() * 30;
 
         // random chance of catching 1 fish
-        // let numFish = gameEngine.automata.ponds[0].numFish;
-        // let fishAvailability = (numFish / PARAMS.pondCapacity) / PARAMS.fishingDifficulty;
-        // if ((numFish > PARAMS.minFish) && (randomFloat(0, 1) > 1 - fishAvailability)) {
-        //     gameEngine.automata.ponds[0].numFish -= 1;
-        //     this.supply += 1;
-        // }
-
-        // catch # fish proportional to pond
         let numFish = gameEngine.automata.ponds[0].numFish;
-        if (numFish > PARAMS.minFish) {
+        let fishAvailability = (numFish / PARAMS.pondCapacity) / PARAMS.fishingDifficulty;
+        if ((numFish > PARAMS.minFish) && (randomFloat(0, 1) > 1 - fishAvailability)) {
             gameEngine.automata.ponds[0].numFish -= 1;
             this.supply += 1;
         }
+
+        // catch # fish proportional to pond
+        // let numFish = gameEngine.automata.ponds[0].numFish;
+        // if (numFish > PARAMS.minFish) {
+        //     gameEngine.automata.ponds[0].numFish -= 1;
+        //     this.supply += 1;
+        // }
         return reward;
     }
 
@@ -165,8 +165,9 @@ class HumanQ {
         nextState = this.selfState(nextState);
 
         if (this.energy < PARAMS.deathThreshold) {
-            this.reward -= 1000;
+            this.reward -= 10000;
         }
+        // this.broadcast(state, action, reward, nextState);
         this.learn(state, action, reward, nextState);
 
         this.epsilon *= PARAMS.epsilonDecay;

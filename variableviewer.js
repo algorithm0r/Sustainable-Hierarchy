@@ -5,8 +5,8 @@ class VariableViewer {
         this.label = label;
         this.variableGetter = variableGetter;
 
-        this.xSize = 1100;
-        this.ySize = 135;
+        this.xSize = 570;
+        this.ySize = 120;
         this.ctx = gameEngine.ctx;
         this.colors = ["#00BB00", "#BB0000", "#00BBBB", "#CCCCCC"];
         this.maxVal = 0;

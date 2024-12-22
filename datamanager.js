@@ -12,19 +12,21 @@ class DataManager {
         this.fishActions = [];
         this.eatActions = [];
         this.reproduceActions = [];
+        this.sexDriveData = [];
 
         this.qlearners = [];
 
         // Initialize the Histogram instance for visualization
-        let graphX = 50;
+        let graphX = 20;
         let graphY = 10;
         gameEngine.addGraph(new Graph(graphX, 0 + graphY, [this.fishPopulation], "Fish"));
         gameEngine.addGraph(new Graph(graphX, 130 + graphY, [this.humanPopulation], "Humans"));
         gameEngine.addGraph(new Graph(graphX, 260 + graphY, [this.humanAveSupply], "Average Human Supply"));
         gameEngine.addGraph(new Graph(graphX, 390 + graphY, [this.humanAveEnergy], "Average Human Energy"));
         gameEngine.addGraph(new Graph(graphX, 520 + graphY, [this.nullActions, this.fishActions, this.eatActions, this.reproduceActions], "Actions", ["null", "fish", "eat", "reproduce"]));
-        gameEngine.addGraph(new QValueViewer(graphX, 650 + graphY, "Q Values"));
-        gameEngine.addGraph(new VariableViewer(graphX, 820 + graphY, "Variables", () => ({"total_deaths": this.automata.totalDeaths })));
+        gameEngine.addGraph(new Histogram(graphX, 650 + graphY, this.sexDriveData, "Sex Drive Gene"))
+        gameEngine.addGraph(new VariableViewer(600 + graphX/2, 650 + graphY, "Variables", () => ({"total_deaths": this.automata.totalDeaths })));
+        gameEngine.addGraph(new QValueViewer(graphX, 780 + graphY, "Q Values"));
     }
 
 
@@ -53,8 +55,12 @@ class DataManager {
         this.eatActions.push(this.automata.humans.filter(human => human.lastAction == 2).length);
         this.reproduceActions.push(this.automata.humans.filter(human => human.lastAction == 3).length);
 
-
-
+        let sexDriveData = Array(20).fill(0);
+        for (let human of this.automata.humans) {
+            let sexDriveBucket = human.sexualDriveGene.value == 1 ? 19 : Math.floor(human.sexualDriveGene.value * 20);
+            sexDriveData[sexDriveBucket]++;
+        }
+        this.sexDriveData.push(sexDriveData);
     }
 
     logData() {
