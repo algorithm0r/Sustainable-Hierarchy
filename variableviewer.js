@@ -15,7 +15,7 @@ class VariableViewer {
     }
     draw(ctx) {
         // Check if the graph drawing is enabled
-        if (!document.getElementById("graphs").checked) return;
+        // if (!document.getElementById("graphs").checked) return;
 
         // Set the style for the box
         this.ctx.strokeStyle = "#000000";

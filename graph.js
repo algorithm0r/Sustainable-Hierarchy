@@ -17,7 +17,7 @@ class Graph {
     }
     draw(ctx) {
         this.updateMax();
-        if (!document.getElementById("graphs").checked) return;
+        // if (!document.getElementById("graphs").checked) return;
         if (this.data[0].length > 1) {
             for (var j = 0; j < this.data.length; j++) {
                 var data = this.data[j];

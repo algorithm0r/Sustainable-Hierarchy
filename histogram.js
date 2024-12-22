@@ -13,7 +13,7 @@ class Histogram {
     }
 
     draw(ctx) {
-        if (!document.getElementById("graphs").checked) return;
+        // if (!document.getElementById("graphs").checked) return;
         var length = this.data.length > (this.xSize) ?
             Math.floor(this.xSize) : this.data.length;
         var start = this.data.length > (this.xSize) ?
@@ -29,7 +29,6 @@ class Histogram {
                 this.fill(this.data[i + start][j] / maxVal, i, 19 - j);
             }
         }
-        console.log(maxVals);
         this.ctx.fillStyle = "#000000";
         this.ctx.textAlign = "center";
         this.ctx.fillText(this.label, this.x + this.xSize / 2, this.y + this.ySize + 10);

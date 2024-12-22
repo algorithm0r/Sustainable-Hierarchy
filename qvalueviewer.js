@@ -15,8 +15,12 @@ class QValueViewer {
     update() {
     }
     draw(ctx) {
+        let shadePondFullValues = document.getElementById("isPondFull").checked;
+        let shadeSupplyFullValues = document.getElementById("isSupplyFull").checked;
+        let shadeHungryValues = document.getElementById("isHungry").checked;
+
         // Check if the graph drawing is enabled
-        if (!document.getElementById("graphs").checked) return;
+        // if (!document.getElementById("graphs").checked) return;
 
         // Set the style for the box
         this.ctx.strokeStyle = "#000000";
@@ -45,12 +49,28 @@ class QValueViewer {
             },
             {}
         );
-        let i = 0;
+
         for (let key in orderedAveQValues) {
+            if (shadePondFullValues && key[10] == "1") {
+                this.ctx.fillStyle = "rgba(200,133,57,0.45)";
+                this.ctx.fillRect(startX, startY-15, 250, 20);
+            }
+
+            if (shadeSupplyFullValues && key[11] == "1") {
+                this.ctx.fillStyle = "rgba(56,202,107,0.45)";
+                this.ctx.fillRect(startX, startY-15, 250, 20);
+            }
+
+            if (shadeHungryValues && key[12] == "1") {
+                this.ctx.fillStyle = "rgba(77,84,189,0.48)";
+                this.ctx.fillRect(startX, startY-15, 250, 20);
+            }
 
             const text = `${key}: ${orderedAveQValues[key].toFixed(3)}`;
 
             // Draw the text inside the box
+
+            this.ctx.fillStyle = "#000000";
             this.ctx.fillText(text, startX, startY);
 
             // Update the y position for the next variable
