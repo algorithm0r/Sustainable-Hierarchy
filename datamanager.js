@@ -26,7 +26,7 @@ class DataManager {
         gameEngine.addGraph(new Graph(graphX, 520 + graphY, [this.nullActions, this.fishActions, this.eatActions, this.reproduceActions], "Actions", ["null", "fish", "eat", "reproduce"]));
         gameEngine.addGraph(new Histogram(graphX, 650 + graphY, this.sexDriveData, "Sex Drive Gene"))
         gameEngine.addGraph(new VariableViewer(600 + graphX/2, 650 + graphY, "Variables", () => ({"total_deaths": this.automata.totalDeaths })));
-        gameEngine.addGraph(new QValueViewer(graphX, 780 + graphY, "Q Values"));
+        gameEngine.addGraph(new QValueViewer(graphX, 785 + graphY, "Q Values"));
     }
 
 
@@ -50,10 +50,10 @@ class DataManager {
         }
         this.humanAveEnergy.push(humanEnergy / humanPop);
 
-        this.nullActions.push(this.automata.humans.filter(human => human.lastAction == 0).length);
-        this.fishActions.push(this.automata.humans.filter(human => human.lastAction == 1).length);
-        this.eatActions.push(this.automata.humans.filter(human => human.lastAction == 2).length);
-        this.reproduceActions.push(this.automata.humans.filter(human => human.lastAction == 3).length);
+        this.nullActions.push(this.automata.humans.filter(human => human.lastAction === 0).length);
+        this.fishActions.push(this.automata.humans.filter(human => human.lastAction === 1).length);
+        this.eatActions.push(this.automata.humans.filter(human => human.lastAction === 2).length);
+        this.reproduceActions.push(this.automata.humans.filter(human => human.lastAction === 3).length);
 
         let sexDriveData = Array(20).fill(0);
         for (let human of this.automata.humans) {

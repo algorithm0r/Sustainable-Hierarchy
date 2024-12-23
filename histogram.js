@@ -31,7 +31,7 @@ class Histogram {
         }
         this.ctx.fillStyle = "#000000";
         this.ctx.textAlign = "center";
-        this.ctx.fillText(this.label, this.x + this.xSize / 2, this.y + this.ySize + 10);
+        this.ctx.fillText(this.label, this.x + this.xSize / 2, this.y + this.ySize + 12);
 
         this.ctx.strokeStyle = "#000000";
         this.ctx.lineWidth = 1;

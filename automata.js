@@ -4,7 +4,7 @@ class Automata {
         gameEngine.addEntity(this);
         this.generation = 0;
         this.ponds = [new Pond()];
-        this.humans = Array.from({ length: PARAMS.initialHumans}, (_, index) => new HumanQ());
+        this.humans = Array.from({ length: PARAMS.initialHumans}, (_, index) => new HumanQ({age: randomInt(PARAMS.maxHumanAge)}));
         this.totalDeaths = 0;
 
 
@@ -19,14 +19,25 @@ class Automata {
         for (let human of this.humans) {
             human.update();
         }
-        for (var i = this.humans.length - 1; i >= 0; --i) {
+
+
+        for (let i = this.humans.length - 1; i >= PARAMS.minHumans; --i) {
             if (this.humans[i].removeFromWorld) {
                 this.humans.splice(i, 1);
-                this.totalDeaths++
+                this.totalDeaths++;
             }
         }
-
-        
+        for (let i = PARAMS.minHumans - 1; i >= 0; --i) {
+            if (this.humans[i].removeFromWorld) {
+                if (PARAMS.preventHumanExtinction && this.humans.length <= PARAMS.minHumans) {
+                    this.humans[i].energy = Math.max(30, this.humans[i].energy); // give the baby some initial energy in dying breath
+                    let baby = this.humans[i].makeBaby();
+                    this.humans.push(baby);
+                }
+                this.humans.splice(i, 1);
+                this.totalDeaths++;
+            }
+        }
     }
 
   

@@ -8,7 +8,7 @@ class Graph {
         this.sublabels = sublabels;
 
         this.xSize = 1160;
-        this.ySize = 120;
+        this.ySize = 115;
         this.ctx = gameEngine.ctx;
         this.colors = ["#00BB00", "#BB0000", "#00BBBB", "#CCCCCC"];
         this.maxVal = 0;
@@ -65,7 +65,7 @@ class Graph {
         this.ctx.textAlign = "right";
         this.ctx.fillText((this.data[0].length - 1)* PARAMS.reportingPeriod, this.x + this.xSize - 5, this.y + this.ySize + 10);
         this.ctx.textAlign = "center";
-        this.ctx.fillText(this.label, this.x + this.xSize / 2, this.y + this.ySize + 10);
+        this.ctx.fillText(this.label, this.x + this.xSize / 2, this.y + this.ySize + 12);
         this.ctx.strokeStyle = "#000000";
         this.ctx.lineWidth = 1;
         this.ctx.strokeRect(this.x, this.y, this.xSize, this.ySize);

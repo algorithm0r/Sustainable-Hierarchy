@@ -5,7 +5,6 @@ class RealGene {
     }
 
     mutate() {
-        var range = 0.08;
         // this.value += Math.random() * range - range / 2;
         this.value += generateNormalSample(0, PARAMS.mutationRange);
         this.clip();

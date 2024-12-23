@@ -1,7 +1,32 @@
 class QLearner {
-    constructor(actions) {
+    constructor(actions, allStateSizes) {
         this.actions = actions;
         this.qValues = new Map();
+        this.initAllStates(allStateSizes, actions.length);
+    }
+
+    initAllStates(allStateSizes, numActions) {
+        const states = [];
+        function backtrack(index, current) {
+            if (index === allStateSizes.length) {
+                states.push(current.join(""));
+                return;
+            }
+
+            // If the current digit has 2 possibilities, consider '0' and '1'
+            for (let i = 0; i < allStateSizes[index]; i++) {
+                current.push(String(i));
+                backtrack(index + 1, current);
+                current.pop();
+            }
+        }
+        backtrack(0, []);
+
+        states.forEach(state => {
+            for (let j = 0; j < numActions; j++) {
+                this.updateQValue(state, j, 0);
+            }
+        });
     }
 
     getActionName(number) {

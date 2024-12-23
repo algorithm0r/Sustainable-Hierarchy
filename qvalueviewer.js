@@ -6,7 +6,7 @@ class QValueViewer {
         this.label = label;
 
         this.xSize = 1160;
-        this.ySize = 175;
+        this.ySize = 255;
         this.ctx = gameEngine.ctx;
         this.colors = ["#00BB00", "#BB0000", "#00BBBB", "#CCCCCC"];
         this.maxVal = 0;
@@ -66,7 +66,12 @@ class QValueViewer {
                 this.ctx.fillRect(startX, startY-15, 250, 20);
             }
 
-            const text = `${key}: ${orderedAveQValues[key].toFixed(3)}`;
+            if (shadeHungryValues && key[12] == "2") {
+                this.ctx.fillStyle = "rgba(204,30,102,0.48)";
+                this.ctx.fillRect(startX, startY-15, 250, 20);
+            }
+
+            const text = `${key}: ${orderedAveQValues[key].toFixed(2)}`;
 
             // Draw the text inside the box
 

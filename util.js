@@ -89,7 +89,7 @@ function loadParameters() {
     PARAMS.pondCapacity = parseInt(document.getElementById("pondCapacity").value);
     PARAMS.initialFish = parseInt(document.getElementById("initialFish").value);
     PARAMS.fishGrowth = parseFloat(document.getElementById("fishGrowth").value);
-    PARAMS.fishEnergy = parseInt(document.getElementById("fishEnergy").value);
+    PARAMS.fishEnergy = parseFloat(document.getElementById("fishEnergy").value);
     PARAMS.fishingDifficulty = parseInt(document.getElementById("fishingDifficulty").value);
     PARAMS.fullPondThreshold = parseFloat(document.getElementById("fullPondThreshold").value);
 
@@ -98,12 +98,14 @@ function loadParameters() {
     PARAMS.initialEnergy = parseInt(document.getElementById("initialEnergy").value);
     PARAMS.deathThreshold = parseInt(document.getElementById("deathThreshold").value);
     PARAMS.reproductionThreshold = parseInt(document.getElementById("reproductionThreshold").value);
-    PARAMS.energyEatThreshold = parseInt(document.getElementById("energyEatThreshold").value);
+    // PARAMS.energyEatThreshold = parseInt(document.getElementById("energyEatThreshold").value);
     PARAMS.supplyEatThreshold = parseInt(document.getElementById("supplyEatThreshold").value);
     PARAMS.ratioEnergyToOffspring = parseFloat(document.getElementById("ratioEnergyToOffspring").value);
     PARAMS.basicEnergyDepletion = parseFloat(document.getElementById("basicEnergyDepletion").value);
     PARAMS.hungerThreshold = parseInt(document.getElementById("hungerThreshold").value);
     PARAMS.sexualDriveMultiplier = parseInt(document.getElementById("sexualDriveMultiplier").value);
+    PARAMS.maxHumanAge = parseInt(document.getElementById("maxHumanAge").value);
+
 
     PARAMS.epsilonDecay = parseFloat(document.getElementById("epsilonDecay").value);
     PARAMS.qLearningRate = parseFloat(document.getElementById("qLearningRate").value);

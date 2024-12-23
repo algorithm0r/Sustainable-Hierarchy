@@ -3,12 +3,13 @@ class HumanQ {
 
     static lastHumanId = 0;
 
-    constructor(
-        id = Human.lastHumanId + 1,
-        energy = PARAMS.initialEnergy,
-        qLearner = new QLearner(["null", "fish", "eat", "reproduce"]),
-        sexualDriveGene = new RealGene(null),
-    ) {
+    constructor({
+                    id = Human.lastHumanId + 1,
+                    energy = PARAMS.initialEnergy + generateNormalSample(0, 20),
+                    qLearner = new QLearner(["null", "fish", "eat", "reproduce"], [2, 2, 3]),
+                    sexualDriveGene = new RealGene(null),
+                    age = 0,
+                } = {}) {
         this.id = id;
         Human.lastHumanId = id;
 
@@ -22,6 +23,7 @@ class HumanQ {
         this.sexualDriveGene = sexualDriveGene;
 
         this.epsilon = 1;
+        this.age = age;
     }
 
     spendEnergy() {
@@ -31,6 +33,10 @@ class HumanQ {
     }
 
     isHungry() {
+        return this.energy < PARAMS.reproductionThreshold;
+    }
+
+    isVeryHungry() {
         return this.energy < PARAMS.hungerThreshold;
     }
 
@@ -90,24 +96,27 @@ class HumanQ {
     reproduce() {
         let reward = this.spendEnergy();
         if (this.energy >= PARAMS.reproductionThreshold) {
-
-            let offspringGene = new RealGene(this.sexualDriveGene);
-            offspringGene.mutate();
-
-            let baby = new HumanQ (
-                gameEngine.automata.lastHumanId + 1,
-                this.energy * PARAMS.ratioEnergyToOffspring,
-                this.copyLearner(),
-                offspringGene,
-            );
-            gameEngine.automata.humans.push(baby);
-
+            let baby = this.makeBaby();
             let spentEnergy = this.energy * PARAMS.ratioEnergyToOffspring;
             this.energy -= spentEnergy;
             reward -= spentEnergy;
             reward += this.calculateSexualDrive();
+            gameEngine.automata.humans.push(baby);
         }
         return reward;
+    }
+
+    makeBaby() {
+        let offspringGene = new RealGene(this.sexualDriveGene);
+        offspringGene.mutate();
+
+        let baby = new HumanQ({
+            id: gameEngine.automata.lastHumanId + 1,
+            energy: this.energy * PARAMS.ratioEnergyToOffspring,
+            qLearner: this.copyLearner(),
+            sexualDriveGene: offspringGene,
+        });
+        return baby;
     }
 
     calculateSexualDrive() {
@@ -115,7 +124,7 @@ class HumanQ {
     }
 
     copyLearner() {
-        let newLearner = new QLearner(this.learner.actions);
+        let newLearner = new QLearner(this.learner.actions, [0]);
         newLearner.qValues = new Map(this.learner.qValues);
         return newLearner;
     }
@@ -123,8 +132,8 @@ class HumanQ {
 
     selfState(cellState) {
         let state = "";
-        state += this.isHungry() ? "1" : "0";
         state += this.isSupplyFull() ? "1" : "0";
+        state += this.isHungry() ? (this.isVeryHungry() ? "2" : "1") : "0";
 
         cellState += state;
         return cellState;
@@ -165,10 +174,11 @@ class HumanQ {
         nextState = this.selfState(nextState);
 
         if (this.energy < PARAMS.deathThreshold) {
-            this.reward -= 10000;
+            reward -= 10000;
+            this.broadcast(state, action, reward, nextState);
+        } else {
+            this.learn(state, action, reward, nextState);
         }
-        // this.broadcast(state, action, reward, nextState);
-        this.learn(state, action, reward, nextState);
 
         this.epsilon *= PARAMS.epsilonDecay;
     }
@@ -190,10 +200,12 @@ class HumanQ {
     }
 
     update() {
+        this.age++;
         this.selectAction();
 
-        if (this.energy < PARAMS.deathThreshold) {
+        if (this.energy < PARAMS.deathThreshold || this.age > PARAMS.maxHumanAge) {
             this.removeFromWorld = true;
+
 
             // logic to simply replace dead human with new one
             // console.log("adding baby")

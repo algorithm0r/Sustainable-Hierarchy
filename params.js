@@ -50,8 +50,10 @@ var PARAMS = {
     broadcastLearning: false,
     metabolismDiminishingReturns: 20,
     epsilonDecay: 0.9999,
-    preventHumanExtinction: false,
+    preventHumanExtinction: true,
+    minHumans: 2,
     sexualDriveMultiplier: 60,
+    maxHumanAge: 3000,
 
 
     qLearningRate: 0.5,
