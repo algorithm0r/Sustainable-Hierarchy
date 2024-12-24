@@ -90,7 +90,7 @@ function loadParameters() {
     PARAMS.initialFish = parseInt(document.getElementById("initialFish").value);
     PARAMS.fishGrowth = parseFloat(document.getElementById("fishGrowth").value);
     PARAMS.fishEnergy = parseFloat(document.getElementById("fishEnergy").value);
-    PARAMS.fishingDifficulty = parseInt(document.getElementById("fishingDifficulty").value);
+    PARAMS.fishingDifficulty = parseFloat(document.getElementById("fishingDifficulty").value);
     PARAMS.fullPondThreshold = parseFloat(document.getElementById("fullPondThreshold").value);
 
 
@@ -105,7 +105,7 @@ function loadParameters() {
     PARAMS.hungerThreshold = parseInt(document.getElementById("hungerThreshold").value);
     PARAMS.sexualDriveMultiplier = parseInt(document.getElementById("sexualDriveMultiplier").value);
     PARAMS.maxHumanAge = parseInt(document.getElementById("maxHumanAge").value);
-
+    PARAMS.deathReward = parseInt(document.getElementById("deathReward").value);
 
     PARAMS.epsilonDecay = parseFloat(document.getElementById("epsilonDecay").value);
     PARAMS.qLearningRate = parseFloat(document.getElementById("qLearningRate").value);

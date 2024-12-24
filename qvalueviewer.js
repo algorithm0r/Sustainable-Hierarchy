@@ -71,7 +71,7 @@ class QValueViewer {
                 this.ctx.fillRect(startX, startY-15, 250, 20);
             }
 
-            const text = `${key}: ${orderedAveQValues[key].toFixed(2)}`;
+            const text = `${key}: ${orderedAveQValues[key].toFixed(3)}`;
 
             // Draw the text inside the box
 

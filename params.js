@@ -1,6 +1,6 @@
 var PARAMS = {
     // sim
-    updatesPerDraw: 100,
+    updatesPerDraw: 50,
 
     // automata
     pixelDimension: 800,
@@ -19,7 +19,7 @@ var PARAMS = {
     // organism
     numLocii: 100,
     mutationRate: 0.05,
-    mutationRange: 0.025,
+    mutationRange: 0.035,
     targetObservationalNoise: 0.1,
     adaptiveStepSize: 0.5,
     deathChancePerGeneration: 0.2,
@@ -50,10 +50,17 @@ var PARAMS = {
     broadcastLearning: false,
     metabolismDiminishingReturns: 20,
     epsilonDecay: 0.9999,
+    generationalEpsDecay: .993,
     preventHumanExtinction: true,
     minHumans: 2,
     sexualDriveMultiplier: 60,
     maxHumanAge: 3000,
+    deathReward: 400,
+
+    nullCost: 1,
+    fishingCost: 1,
+    eatingCost: 1,
+    reproductionCost: 1,
 
 
     qLearningRate: 0.5,
@@ -63,7 +70,7 @@ var PARAMS = {
 
     // data gathering
     histogramWidth: 5,
-    reportingPeriod: 100,
+    reportingPeriod: 50,
     epoch: 150000,
 
     // database
