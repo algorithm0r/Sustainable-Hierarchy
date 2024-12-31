@@ -1,3 +1,7 @@
+// TODO: make each q-value a gene.
+
+// TODO: make sex reward a fixed value
+
 
 class HumanQ {
 
@@ -6,35 +10,34 @@ class HumanQ {
     constructor({
                     id = Human.lastHumanId + 1,
                     energy = PARAMS.initialEnergy + generateNormalSample(0, 20),
-                    qLearner = new QLearner(["null", "fish", "eat", "reproduce"], [2, 2, 3]),
-                    sexualDriveGene = new RealGene(null),
+                    // parentQLearner = new QLearner(["null", "fish", "eat", "reproduce"], [2, 2, 3]),
+                    parentGeneSet = null,
                     age = 0,
-                    generationalEpsilonDecay = 1,
+                    // generationalEpsilonDecay = 1,
                 } = {}) {
-        this.id = id;
+        // this.id = id;
         Human.lastHumanId = id;
 
         this.energy = energy;
         this.supply = 0;
 
-//        let actions = ["null", "fish", "eat", "reproduce"];
-//         let actions = ["null", "fish", "eat"];
+        let actions = ["null", "fish", "eat", "reproduce"];
+        let numStates = [2, 2, 3];
         this.lastAction = 0;
-        this.learner = qLearner;
-        this.sexualDriveGene = sexualDriveGene;
+        this.geneSet = new HumanGeneSet({
+            parentGeneSet: parentGeneSet,
+            allStateSizes: numStates,
+            numActions: actions.length
+        });
+        this.learner = new QLearner(actions, this.geneSet.initialQValues);
 
-        this.generationalEpsilonDecay = generationalEpsilonDecay;
-        this.epsilon = (generationalEpsilonDecay + 1) / 2;
-        // this.epsilon = 1;
+        // this.generationalEpsilonDecay = generationalEpsilonDecay;
+        // this.epsilon = (generationalEpsilonDecay + 1) / 2;
+        this.epsilon = this.geneSet.initialEpsilon;
         this.age = age;
         this.maxAge = PARAMS.maxHumanAge + generateNormalSample(0, PARAMS.maxHumanAge*.5)
     }
 
-    spendEnergy() {
-        let spent = PARAMS.basicEnergyDepletion;
-        this.energy -= spent;
-        return -spent;
-    }
 
     isHungry() {
         return this.energy < PARAMS.reproductionThreshold;
@@ -55,14 +58,16 @@ class HumanQ {
 
 
     doNothing() {
-        let reward = this.spendEnergy() * PARAMS.nullCost;
-        return reward;
+        let spent = PARAMS.basicEnergyDepletion * PARAMS.nullCost;
+        this.energy -= spent;
+        return -spent;
     }
 
     fish() {
-        let reward = this.spendEnergy() * PARAMS.fishingCost;
+        let spent = PARAMS.basicEnergyDepletion * PARAMS.fishingCost;
+        this.energy -= spent;
 
-        // random chance of catching 1 fish
+        // probability of catching 1 fish
         let numFish = gameEngine.automata.ponds[0].numFish;
         let fishAvailability = (numFish / PARAMS.pondCapacity) / PARAMS.fishingDifficulty;
         if ((numFish > PARAMS.minFish) && (randomFloat(0, 1) > 1 - fishAvailability)) {
@@ -76,17 +81,19 @@ class HumanQ {
         //     gameEngine.automata.ponds[0].numFish -= 1;
         //     this.supply += 1;
         // }
-        return reward;
+        return -spent;
     }
 
     eat() {
-        let reward = this.spendEnergy() * PARAMS.eatingCost;
+        let spent = PARAMS.basicEnergyDepletion * PARAMS.eatingCost;
+        this.energy -= spent;
+        let reward = -spent;
 
         if (this.supply >= 1) {
             this.supply -= 1;
-            let base = PARAMS.metabolismDiminishingReturns * PARAMS.maxEnergy + 1;
             //  todo: this is not quite right yet!
-//            this.energy = PARAMS.maxEnergy * Math.min(1, logBase(base, PARAMS.metabolismDiminishingReturns * (this.energy + PARAMS.fishEnergy) + 1));
+            // let base = PARAMS.metabolismDiminishingReturns * PARAMS.maxEnergy + 1;
+            // this.energy = PARAMS.maxEnergy * Math.min(1, logBase(base, PARAMS.metabolismDiminishingReturns * (this.energy + PARAMS.fishEnergy) + 1));
             let gap = PARAMS.maxEnergy - this.energy;
             let energyFromFood = gap / 100 * PARAMS.fishEnergy;
             this.energy += energyFromFood;
@@ -98,10 +105,13 @@ class HumanQ {
     }
 
     reproduce() {
-        let reward = this.spendEnergy() * PARAMS.reproductionCost;
+        let spent = PARAMS.basicEnergyDepletion * PARAMS.reproductionCost;
+        this.energy -= spent;
+        let reward = -spent;
+
         if (this.energy >= PARAMS.reproductionThreshold) {
-            let baby = this.makeBaby();
             let spentEnergy = this.energy * PARAMS.ratioEnergyToOffspring;
+            this.makeBaby(spentEnergy);
             this.energy -= spentEnergy;
             reward -= spentEnergy;
             reward += this.calculateSexualDrive();
@@ -109,19 +119,16 @@ class HumanQ {
         return reward;
     }
 
-    makeBaby() {
-        let offspringGene = new RealGene(this.sexualDriveGene);
-        offspringGene.mutate();
+    makeBaby(initialEnergy) {
+        // let offspringGene = new RealGene(this.sexualDriveGene);
+        // offspringGene.mutate();
 
         let baby = new HumanQ({
-            id: gameEngine.automata.lastHumanId + 1,
-            energy: this.energy * PARAMS.ratioEnergyToOffspring,
-            qLearner: this.copyLearner(),
-            // qLearner: new QLearner(["null", "fish", "eat", "reproduce"], [2, 2, 3]),
-            sexualDriveGene: offspringGene,
-            generationalEpsilonDecay: this.generationalEpsilonDecay * PARAMS.generationalEpsDecay,
+            energy: initialEnergy,
+            // qLearner: this.copyLearner()
+            parentGeneSet: this.geneSet,
+            // generationalEpsilonDecay: this.generationalEpsilonDecay * PARAMS.generationalEpsDecay,
         });
-        console.log(baby);
         gameEngine.automata.humans.push(baby);
         gameEngine.automata.totalBirths++;
 
@@ -129,14 +136,14 @@ class HumanQ {
     }
 
     calculateSexualDrive() {
-        return (this.sexualDriveGene.value - .5) * 2 * PARAMS.sexualDriveMultiplier;
+        return (this.geneSet.sexDriveGene.value - .5) * 2 * PARAMS.sexualDriveMultiplier;
     }
-
-    copyLearner() {
-        let newLearner = new QLearner(this.learner.actions, [0]);
-        newLearner.qValues = new Map(this.learner.qValues);
-        return newLearner;
-    }
+    //
+    // copyLearner() {
+    //     let newLearner = new QLearner(this.learner.actions, [0]);
+    //     newLearner.qValues = new Map(this.learner.qValues);
+    //     return newLearner;
+    // }
 
 
     selfState(cellState) {
@@ -157,7 +164,10 @@ class HumanQ {
         }
     }
 
-    // todo fix infiinite recursive call in broadcast
+    // todo: should I broadcast births, in addition to deaths?
+    // todo: do I really want to tamper with the delicate learnings of all individual
+    //   humans when a person dies by broadcasting their q-values to everyone? Could
+    //   that be jarring to the individual learning happening?
     broadcast(state, action, reward, nextState) {
         gameEngine.automata.humans.forEach(human => {
             // if (randomFloat(0, 1) < .2) {
@@ -194,8 +204,6 @@ class HumanQ {
 
         this.epsilon *= PARAMS.epsilonDecay;
     }
-
-    // TODO: IF A HUMAN DIES, THAT SHOULD BE BROADCASTED!!
 
     act(action) {
         this.lastAction = action;

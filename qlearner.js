@@ -1,31 +1,10 @@
 class QLearner {
-    constructor(actions, allStateSizes) {
+    constructor(actions, initialQValues) {
         this.actions = actions;
         this.qValues = new Map();
-        this.initAllStates(allStateSizes, actions.length);
-    }
 
-    initAllStates(allStateSizes, numActions) {
-        const states = [];
-        function backtrack(index, current) {
-            if (index === allStateSizes.length) {
-                states.push(current.join(""));
-                return;
-            }
-
-            // If the current digit has 2 possibilities, consider '0' and '1'
-            for (let i = 0; i < allStateSizes[index]; i++) {
-                current.push(String(i));
-                backtrack(index + 1, current);
-                current.pop();
-            }
-        }
-        backtrack(0, []);
-
-        states.forEach(state => {
-            for (let j = 0; j < numActions; j++) {
-                this.updateQValue(state, j, 0);
-            }
+        initialQValues.forEach(gene => {
+            this.qValues.set(gene.name, gene.value);
         });
     }
 
@@ -33,17 +12,13 @@ class QLearner {
         return this.actions[number];
     }
 
-    stateActionPair(state, action) {
-        return JSON.stringify({ state: state, action: action });
-    }
-
     updateQValue(state, action, newValue) {
-        let key = this.stateActionPair(state, action);
+        let key = stateActionPair(state, action);
         this.qValues.set(key, newValue);
     }
 
     getQValue(state, action) {
-        let key = this.stateActionPair(state, action);
+        let key = stateActionPair(state, action);
         return this.qValues.get(key);
     }
 

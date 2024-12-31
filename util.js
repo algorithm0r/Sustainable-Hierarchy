@@ -65,6 +65,11 @@ function databaseDisconnected() {
 };
 
 
+function stateActionPair(state, action) {
+    return JSON.stringify({ state: state, action: action });
+}
+
+
 function loadParameters() {
 //    PARAMS.numRows = parseInt(document.getElementById("numRows").value);
 //    PARAMS.numCols = parseInt(document.getElementById("numCols").value);

@@ -1,6 +1,6 @@
 var PARAMS = {
     // sim
-    updatesPerDraw: 50,
+    updatesPerDraw: 1,
 
     // automata
     pixelDimension: 800,
@@ -9,7 +9,7 @@ var PARAMS = {
 
     // population
     numOrganisms: 100,
-    initialVariation: .3,
+    initialVariation: .17,
     maxOffspring: 5,
     targetValue: 0,
     targetVariance: 5,
@@ -51,7 +51,7 @@ var PARAMS = {
     metabolismDiminishingReturns: 20,
     epsilonDecay: 0.9999,
     generationalEpsDecay: .993,
-    preventHumanExtinction: true,
+    preventHumanExtinction: false,
     minHumans: 2,
     sexualDriveMultiplier: 60,
     maxHumanAge: 3000,
@@ -70,7 +70,7 @@ var PARAMS = {
 
     // data gathering
     histogramWidth: 5,
-    reportingPeriod: 50,
+    reportingPeriod: 1,
     epoch: 150000,
 
     // database
