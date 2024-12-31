@@ -30,77 +30,90 @@
         <p>Simulation Parameters</p>
         <div id="parameters">
 
-            <div class="parameter-section">
-                <h3>Fish Parameters</h3>
+            <div class="column">
+                <div class="parameter-section">
+                    <h3>Fish Parameters</h3>
 
-                <label for="minFish">Minimum Fish:</label>
-                <input type="number" id="minFish" value="10" /><br />
+                    <label for="minFish">Minimum Fish:</label>
+                    <input type="number" id="minFish" value="10" /><br />
 
-                <label for="pondCapacity">Pond Capacity:</label>
-                <input type="number" id="pondCapacity" value="1000" /><br />
+                    <label for="pondCapacity">Pond Capacity:</label>
+                    <input type="number" id="pondCapacity" value="1000" /><br />
 
-                <label for="initialFish">Initial Fish:</label>
-                <input type="number" id="initialFish" value="1000" /><br />
+                    <label for="initialFish">Initial Fish:</label>
+                    <input type="number" id="initialFish" value="1000" /><br />
 
-                <label for="fishGrowth">Fish Growth Rate:</label>
-                <input type="number" id="fishGrowth" value=".03" /><br />
+                    <label for="fishGrowth">Fish Growth Rate:</label>
+                    <input type="number" id="fishGrowth" value=".03" /><br />
 
-                <label for="fishEnergy">Fish Food Energy Value (0 - 100):</label>
-                <input type="number" id="fishEnergy" value="30" step="1" /><br />
+                    <label for="fishEnergy">Fish Food Energy Value (0 - 100):</label>
+                    <input type="number" id="fishEnergy" value="30" step="1" /><br />
 
-                <label for="fishingDifficulty">Fishing Difficulty:</label>
-                <input type="number" id="fishingDifficulty" value="3"/><br />
+                    <label for="fishingDifficulty">Fishing Difficulty:</label>
+                    <input type="number" id="fishingDifficulty" value="3"/><br />
 
-                <label for="fullPondThreshold">Full Pond Threshold (0 - 1):</label>
-                <input type="number" id="fullPondThreshold" value=".5"/><br />
+                    <label for="fullPondThreshold">Full Pond Threshold (0 - 1):</label>
+                    <input type="number" id="fullPondThreshold" value=".5"/><br />
 
+                </div>
+
+                <div class="parameter-section">
+                    <h3>Other Parameters</h3>
+
+                    <label for="updatesPerDraw">Updates Per Draw:</label>
+                    <input type="number" id="updatesPerDraw" value="50" /><br />
+
+                </div>
             </div>
 
-            <div class="parameter-section">
-                <h3>Human Parameters</h3>
-                <label for="initialHumans">Initial Humans:</label>
-                <input type="number" id="initialHumans" value="20" /><br />
 
-                <label for="initialEnergy">Initial Energy (0 - 100):</label>
-                <input type="number" id="initialEnergy" value="20" step="10" /><br />
+            <div class="column">
+                <div class="parameter-section">
+                    <h3>Human Parameters</h3>
+                    <label for="initialHumans">Initial Humans:</label>
+                    <input type="number" id="initialHumans" value="20" /><br />
 
-                <label for="deathThreshold">Energy Level to Die (0 - 100):</label>
-                <input type="number" id="deathThreshold" value="0" /><br />
+                    <label for="initialEnergy">Initial Energy (0 - 100):</label>
+                    <input type="number" id="initialEnergy" value="20" step="10" /><br />
 
-                <label for="maxHumanAge">Max Human Age:</label>
-                <input type="number" id="maxHumanAge" value="2500" /><br />
+                    <label for="deathThreshold">Energy Level to Die (0 - 100):</label>
+                    <input type="number" id="deathThreshold" value="0" /><br />
 
-                <label for="deathReward">Death Reward (-):</label>
-                <input type="number" id="deathReward" value="1000" /><br />
+                    <label for="maxHumanAge">Max Human Age:</label>
+                    <input type="number" id="maxHumanAge" value="2500" /><br />
 
-                <label for="reproductionThreshold">Energy Required to Reproduce (0 - 100):</label>
-                <input type="number" id="reproductionThreshold" value="92" step="5" /><br />
+                    <label for="deathReward">Death Reward (-):</label>
+                    <input type="number" id="deathReward" value="1000" /><br />
 
-                <label for="supplyEatThreshold">Supply Full Threshold:</label>
-                <input type="number" id="supplyEatThreshold" value="1" step="1" /><br />
+                    <label for="reproductionThreshold">Energy Required to Reproduce (0 - 100):</label>
+                    <input type="number" id="reproductionThreshold" value="92" step="5" /><br />
 
-                <label for="ratioEnergyToOffspring">Energy Sacrificed to Offspring (0 - 1):</label>
-                <input type="number" id="ratioEnergyToOffspring" value="0.5" step="0.1" /><br />
+                    <label for="supplyEatThreshold">Supply Full Threshold:</label>
+                    <input type="number" id="supplyEatThreshold" value="1" step="1" /><br />
 
-                <label for="basicEnergyDepletion">Energy Depletion Per Turn:</label>
-                <input type="number" id="basicEnergyDepletion" value="0.09" step="0.002" /><br />
+                    <label for="ratioEnergyToOffspring">Energy Sacrificed to Offspring (0 - 1):</label>
+                    <input type="number" id="ratioEnergyToOffspring" value="0.5" step="0.1" /><br />
 
-                <label for="hungerThreshold">Hunger Threshold (0 - 100):</label>
-                <input type="number" id="hungerThreshold" value="50" /><br />
+                    <label for="basicEnergyDepletion">Energy Depletion Per Turn:</label>
+                    <input type="number" id="basicEnergyDepletion" value="0.09" step="0.002" /><br />
 
-                <label for="sexualDriveMultiplier">Sex Drive Multiplier ( >= 0):</label>
-                <input type="number" id="sexualDriveMultiplier" value="100" /><br />
+                    <label for="hungerThreshold">Hunger Threshold (0 - 100):</label>
+                    <input type="number" id="hungerThreshold" value="50" /><br />
 
-                <label for="epsilonDecay">Q Epsilon Decay:</label>
-                <input type="number" id="epsilonDecay" value="0.9998" /><br />
+                    <label for="sexualDriveMultiplier">Sex Drive Multiplier ( >= 0):</label>
+                    <input type="number" id="sexualDriveMultiplier" value="100" /><br />
 
-                <label for="qLearningRate">Q Learning Rate:</label>
-                <input type="number" id="qLearningRate" value="0.3" /><br />
+                    <label for="epsilonDecay">Q Epsilon Decay:</label>
+                    <input type="number" id="epsilonDecay" value="0.9998" /><br />
 
-                <label for="qLearningDiscount">Q Discount:</label>
-                <input type="number" id="qLearningDiscount" value="0.997" /><br />
+                    <label for="qLearningRate">Q Learning Rate:</label>
+                    <input type="number" id="qLearningRate" value="0.3" /><br />
+
+                    <label for="qLearningDiscount">Q Discount:</label>
+                    <input type="number" id="qLearningDiscount" value="0.997" /><br />
 
 
+                </div>
             </div>
 
         </div>

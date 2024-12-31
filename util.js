@@ -115,6 +115,8 @@ function loadParameters() {
     PARAMS.epsilonDecay = parseFloat(document.getElementById("epsilonDecay").value);
     PARAMS.qLearningRate = parseFloat(document.getElementById("qLearningRate").value);
     PARAMS.qLearningDiscount = parseFloat(document.getElementById("qLearningDiscount").value);
+    PARAMS.updatesPerDraw = parseInt(document.getElementById("updatesPerDraw").value);
+    PARAMS.reportingPeriod = parseInt(document.getElementById("updatesPerDraw").value);
 
 
     console.log(PARAMS);

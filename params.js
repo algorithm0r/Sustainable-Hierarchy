@@ -1,6 +1,6 @@
 var PARAMS = {
     // sim
-    updatesPerDraw: 1,
+    updatesPerDraw: 50,
 
     // automata
     pixelDimension: 800,
@@ -70,7 +70,7 @@ var PARAMS = {
 
     // data gathering
     histogramWidth: 5,
-    reportingPeriod: 1,
+    reportingPeriod: 50,
     epoch: 150000,
 
     // database

@@ -18,6 +18,12 @@ body {
     width: 500px; /* Reduced width for compactness */
 }
 
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between boxes in each column */
+}
+
 #parameters {
     border: 2px solid #03ecd3;
     padding: 8px; /* Reduced padding for compactness */
@@ -29,6 +35,8 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two equal columns */
     grid-row: 2; /* Place in the second row */
+    gap: 10px; /* Space between boxes in each column */
+
 
 }
 
