@@ -1,5 +1,5 @@
 class Graph {
-    constructor(x, y, data, label, sublabels = []) {
+    constructor(x, y, data, label, sublabels = [], horizantal_lines = []) {
 //        this.game = game;
         this.x = x;
         this.y = y;
@@ -12,6 +12,7 @@ class Graph {
         this.ctx = gameEngine.ctx;
         this.colors = ["#00BB00", "#BB0000", "#00BBBB", "#CCCCCC"];
         this.maxVal = 0;
+        this.horizantal_lines = horizantal_lines;
     }
     update() {
     }
@@ -69,6 +70,26 @@ class Graph {
         this.ctx.strokeStyle = "#000000";
         this.ctx.lineWidth = 1;
         this.ctx.strokeRect(this.x, this.y, this.xSize, this.ySize);
+
+        this.horizantal_lines.forEach(([label, hLine]) => {
+            // Add a horizontal line at y = 30
+            this.ctx.strokeStyle = "#FF0000"; // Choose a color for the line
+            this.ctx.lineWidth = 1;
+            this.ctx.setLineDash([5, 5]);
+            const yCanvas = this.y + this.ySize - Math.floor(hLine / this.maxVal * this.ySize);
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.x, yCanvas);
+            this.ctx.lineTo(this.x + this.xSize, yCanvas);
+            this.ctx.stroke();
+            this.ctx.closePath();
+            this.ctx.setLineDash([]);
+
+            // Add a label to the dashed line
+            this.ctx.fillStyle = "#FF0000"; // Match the color of the line
+            this.ctx.textAlign = "left"; // Position the label
+            this.ctx.font = "12px Arial"; // Set font size and style
+            this.ctx.fillText(label, this.x + 5, yCanvas - 5); // Adjust position slightly above the line
+        });
     }
     updateMax() {
         this.maxVal = Math.max(...[].concat(...this.data));

@@ -21,10 +21,10 @@ class DataManager {
         // Initialize the Histogram instance for visualization
         let graphX = 20;
         let graphY = 10;
-        gameEngine.addGraph(new Graph(graphX, 0 + graphY, [this.fishPopulation], "Fish"));
+        gameEngine.addGraph(new Graph(graphX, 0 + graphY, [this.fishPopulation], "Fish", [], [["full pond threshold", PARAMS.pondCapacity * PARAMS.fullPondThreshold]]));
         gameEngine.addGraph(new Graph(graphX, 130 + graphY, [this.humanPopulation], "Humans"));
-        gameEngine.addGraph(new Graph(graphX, 260 + graphY, [this.humanAveSupply], "Average Human Supply"));
-        gameEngine.addGraph(new Graph(graphX, 390 + graphY, [this.humanAveEnergy], "Average Human Energy"));
+        gameEngine.addGraph(new Graph(graphX, 260 + graphY, [this.humanAveSupply], "Average Human Supply", [], [["supply full threshold", PARAMS.supplyEatThreshold]]));
+        gameEngine.addGraph(new Graph(graphX, 390 + graphY, [this.humanAveEnergy], "Average Human Energy", [], [["reproduction threshold", PARAMS.reproductionThreshold], ["very hungry threshold", PARAMS.hungerThreshold]]));
         // gameEngine.addGraph(new Graph(graphX, 520 + graphY, [this.nullActions, this.fishActions, this.eatActions, this.reproduceActions], "Actions", ["null", "fish", "eat", "reproduce"]));
         gameEngine.addGraph(new Graph(graphX, 520 + graphY, [this.fishActions, this.eatActions, this.reproduceActions], "Actions", ["fish", "eat", "reproduce"]));
         gameEngine.addGraph(new Histogram(graphX, 650 + graphY, this.sexDriveData, "Sex Drive Gene"))

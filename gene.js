@@ -18,7 +18,7 @@ class RealGene {
 
     mutate() {
         // this.value += Math.random() * range - range / 2;
-        this.value += generateNormalSample(0, this.mutationLevel);
+        this.value *= (1 + generateNormalSample(0, this.mutationLevel));
         this.clip();
     }
 
@@ -80,7 +80,7 @@ class HumanGeneSet {
         states.forEach(state => {
             for (let j = 0; j < numActions; j++) {
                 genes.push(new RealGene({
-                    geneValue: 0,
+                    geneValue: 1,
                     clipValue: false,
                     name: stateActionPair(state, j),
                     mutationLevel: .2
