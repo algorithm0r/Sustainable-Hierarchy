@@ -1,7 +1,7 @@
 class Histogram {
-    constructor(x, y, data, label) {
-        this.xSize = 570;
-        this.ySize = 120;
+    constructor(x, y, data, label, xSize, ySize) {
+        this.xSize = xSize;
+        this.ySize = ySize;
         this.x = x;
         this.y = y;
         this.label = label;

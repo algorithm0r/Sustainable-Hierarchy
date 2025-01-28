@@ -18,7 +18,7 @@ var PARAMS = {
 
     // organism
     numLocii: 100,
-    mutationRate: 0.05,
+    mutationRate: 0.5,
     mutationRange: 0.035,
     targetObservationalNoise: 0.1,
     adaptiveStepSize: 0.5,
@@ -56,11 +56,12 @@ var PARAMS = {
     sexualDriveMultiplier: 60,
     maxHumanAge: 3000,
     deathReward: 400,
+    qGeneMutationStd: .02,
 
     nullCost: 1,
-    fishingCost: 1,
-    eatingCost: 1,
-    reproductionCost: 1,
+    fishingCost: 20,
+    eatingCost: 20,
+    reproductionCost: 20,
 
 
     qLearningRate: 0.5,

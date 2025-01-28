@@ -27,7 +27,7 @@ class DataManager {
         gameEngine.addGraph(new Graph(graphX, 390 + graphY, [this.humanAveEnergy], "Average Human Energy", [], [["reproduction threshold", PARAMS.reproductionThreshold], ["very hungry threshold", PARAMS.hungerThreshold]]));
         // gameEngine.addGraph(new Graph(graphX, 520 + graphY, [this.nullActions, this.fishActions, this.eatActions, this.reproduceActions], "Actions", ["null", "fish", "eat", "reproduce"]));
         gameEngine.addGraph(new Graph(graphX, 520 + graphY, [this.fishActions, this.eatActions, this.reproduceActions], "Actions", ["fish", "eat", "reproduce"]));
-        gameEngine.addGraph(new Histogram(graphX, 650 + graphY, this.sexDriveData, "Sex Drive Gene"))
+        // gameEngine.addGraph(new Histogram(graphX, 650 + graphY, this.sexDriveData, "Sex Drive Gene", 570, 120))
         gameEngine.addGraph(new VariableViewer(600 + graphX/2, 650 + graphY, "Variables", () => ({
             "total_deaths": this.automata.totalDeaths,
             "total_births": this.automata.totalBirths,
@@ -36,10 +36,9 @@ class DataManager {
             "maxHumanAge": this.automata.maxHumanAge,
             // "aveStartingEpsilon": this.automata.aveStartingEpsilon
         })));
-        gameEngine.addGraph(new Histogram(graphX, 780 + graphY, this.initialEpsilonData, "initial Epsilon Gene"))
-        gameEngine.addGraph(new Histogram(600 + graphX/2, 780 + graphY, this.qGene1Data, "Q Gene 1"))
-        gameEngine.addGraph(new QValueViewer(graphX, 915 + graphY, "Average Q Values"));
-        gameEngine.addGraph(new InitialQValueGeneViewer(graphX, 1185 + graphY, "Average Initial Q Value Genes"));
+        gameEngine.addGraph(new Histogram(graphX, 650 + graphY, this.initialEpsilonData, "initial Epsilon Gene", 570, 120))
+        gameEngine.addGraph(new QValueViewer(graphX, 785 + graphY, "Average Q Values"));
+        // gameEngine.addGraph(new InitialQValueGeneViewer(graphX, 1185 + graphY, "Average Initial Q Value Genes"));
     }
 
 

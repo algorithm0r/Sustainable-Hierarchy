@@ -21,7 +21,7 @@ class HumanQ {
         this.energy = energy;
         this.supply = 0;
 
-        let actions = ["null", "fish", "eat", "reproduce"];
+        let actions = ["null", "fish", "eat"];
         let numStates = [2, 2, 3];
         this.lastAction = 0;
         this.geneSet = new HumanGeneSet({
@@ -105,18 +105,18 @@ class HumanQ {
     }
 
     reproduce() {
-        let spent = PARAMS.basicEnergyDepletion * PARAMS.reproductionCost;
-        this.energy -= spent;
-        let reward = -spent;
+        // let spent = PARAMS.basicEnergyDepletion * PARAMS.reproductionCost;
+        // this.energy -= spent;
+        // let reward = -spent;
 
         if (this.energy >= PARAMS.reproductionThreshold) {
             let spentEnergy = this.energy * PARAMS.ratioEnergyToOffspring;
             this.makeBaby(spentEnergy);
             this.energy -= spentEnergy;
-            reward -= spentEnergy;
-            reward += this.calculateSexualDrive();
+            // reward -= spentEnergy;
+            // reward += this.calculateSexualDrive();
         }
-        return reward;
+        // return reward;
     }
 
     makeBaby(initialEnergy) {
@@ -195,11 +195,16 @@ class HumanQ {
         let nextState = gameEngine.automata.ponds[0].isFull() ? "1" : "0";
         nextState = this.selfState(nextState);
 
-        if (this.energy < PARAMS.deathThreshold) {
-            reward -= PARAMS.deathReward;
-            this.broadcast(state, action, reward, nextState);
-        } else {
-            this.learn(state, action, reward, nextState);
+        // if (this.energy < PARAMS.deathThreshold) {
+        //     reward -= PARAMS.deathReward;
+        //     this.broadcast(state, action, reward, nextState);
+        // } else {
+        //     this.learn(state, action, reward, nextState);
+        // }
+        this.learn(state, action, reward, nextState);
+
+        if (this.energy > PARAMS.reproductionThreshold) {
+            this.reproduce();
         }
 
         this.epsilon *= PARAMS.epsilonDecay;

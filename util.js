@@ -66,7 +66,7 @@ function databaseDisconnected() {
 
 
 function stateActionPair(state, action) {
-    return JSON.stringify({ state: state, action: action });
+    return JSON.stringify({ s: state, a: action });
 }
 
 

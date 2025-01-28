@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -23,7 +25,7 @@
     <script type="text/javascript" src="./main.js"></script>
 </head>
 <body>
-    <canvas id="gameWorld" width="1200" height="1500"></canvas>
+    <canvas id="gameWorld" width="1200" height="1900"></canvas>
     <div id="controlPanel">
         <div id="db" class="db-status">Database</div>
 
@@ -47,10 +49,10 @@
                     <input type="number" id="fishGrowth" value=".03" /><br />
 
                     <label for="fishEnergy">Fish Food Energy Value (0 - 100):</label>
-                    <input type="number" id="fishEnergy" value="30" step="1" /><br />
+                    <input type="number" id="fishEnergy" value="36" step="1" /><br />
 
                     <label for="fishingDifficulty">Fishing Difficulty:</label>
-                    <input type="number" id="fishingDifficulty" value="3"/><br />
+                    <input type="number" id="fishingDifficulty" value="1"/><br />
 
                     <label for="fullPondThreshold">Full Pond Threshold (0 - 1):</label>
                     <input type="number" id="fullPondThreshold" value=".5"/><br />
@@ -61,7 +63,7 @@
                     <h3>Other Parameters</h3>
 
                     <label for="updatesPerDraw">Updates Per Draw:</label>
-                    <input type="number" id="updatesPerDraw" value="2" /><br />
+                    <input type="number" id="updatesPerDraw" value="10" /><br />
 
                 </div>
             </div>
@@ -80,25 +82,25 @@
                     <input type="number" id="deathThreshold" value="0" /><br />
 
                     <label for="maxHumanAge">Max Human Age:</label>
-                    <input type="number" id="maxHumanAge" value="2500" /><br />
+                    <input type="number" id="maxHumanAge" value="1000" /><br />
 
                     <label for="deathReward">Death Reward (-):</label>
-                    <input type="number" id="deathReward" value="50" /><br />
+                    <input type="number" id="deathReward" value="0" /><br />
 
                     <label for="reproductionThreshold">Energy Required to Reproduce (0 - 100):</label>
-                    <input type="number" id="reproductionThreshold" value="92" step="5" /><br />
+                    <input type="number" id="reproductionThreshold" value="95" step="5" /><br />
 
                     <label for="supplyEatThreshold">Supply Full Threshold:</label>
                     <input type="number" id="supplyEatThreshold" value="1" step="1" /><br />
 
                     <label for="ratioEnergyToOffspring">Energy Sacrificed to Offspring (0 - 1):</label>
-                    <input type="number" id="ratioEnergyToOffspring" value="0.5" step="0.1" /><br />
+                    <input type="number" id="ratioEnergyToOffspring" value="0.4" step="0.1" /><br />
 
                     <label for="basicEnergyDepletion">Energy Depletion Per Turn:</label>
-                    <input type="number" id="basicEnergyDepletion" value="0.09" step="0.002" /><br />
+                    <input type="number" id="basicEnergyDepletion" value="0.05" step="0.002" /><br />
 
                     <label for="hungerThreshold">Hunger Threshold (0 - 100):</label>
-                    <input type="number" id="hungerThreshold" value="50" /><br />
+                    <input type="number" id="hungerThreshold" value="20" /><br />
 
                     <label for="sexualDriveMultiplier">Sex Drive Multiplier ( >= 0):</label>
                     <input type="number" id="sexualDriveMultiplier" value="60" /><br />
@@ -107,10 +109,10 @@
                     <input type="number" id="epsilonDecay" value="0.9998" /><br />
 
                     <label for="qLearningRate">Q Learning Rate:</label>
-                    <input type="number" id="qLearningRate" value="0.3" /><br />
+                    <input type="number" id="qLearningRate" value="0.05" /><br />
 
                     <label for="qLearningDiscount">Q Discount:</label>
-                    <input type="number" id="qLearningDiscount" value="0.997" /><br />
+                    <input type="number" id="qLearningDiscount" value="0.999" /><br />
 
 
                 </div>
@@ -137,6 +139,9 @@
             <input type="checkbox" id="isHungry" checked />
             <label for="isHungry">Is Hungry</label>
         </div>
-    </div>  
+    </div>
 </body>
 </html>
+
+
+
