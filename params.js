@@ -45,7 +45,7 @@ var PARAMS = {
     energyEatThreshold: 90,
     supplyEatThreshold: 1,
     ratioEnergyToOffspring: .4,
-    basicEnergyDepletion: .05,
+    basicEnergyDepletion: .01,
     hungerThreshold: 20,
     metabolismDiminishingReturns: 20,
     epsilonDecay: 0.9998,
