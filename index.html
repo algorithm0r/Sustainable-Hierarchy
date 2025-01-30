@@ -22,6 +22,9 @@
     <script type="text/javascript" src="./qlearner.js"></script>
     <script type="text/javascript" src="./pond.js"></script>
     <script type="text/javascript" src="./datamanager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.26.0/cytoscape.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/graphology@0.24.0/dist/graphology.umd.min.js"></script>
+    <script type="text/javascript" src="./locality.js"></script>
     <script type="text/javascript" src="./main.js"></script>
 </head>
 <body>
@@ -37,25 +40,25 @@
                     <h3>Fish Parameters</h3>
 
                     <label for="minFish">Minimum Fish:</label>
-                    <input type="number" id="minFish" value="10" /><br />
+                    <input type="number" id="minFish" /><br />
 
                     <label for="pondCapacity">Pond Capacity:</label>
-                    <input type="number" id="pondCapacity" value="1000" /><br />
+                    <input type="number" id="pondCapacity" /><br />
 
                     <label for="initialFish">Initial Fish:</label>
-                    <input type="number" id="initialFish" value="1000" /><br />
+                    <input type="number" id="initialFish" /><br />
 
                     <label for="fishGrowth">Fish Growth Rate:</label>
-                    <input type="number" id="fishGrowth" value=".03" /><br />
+                    <input type="number" id="fishGrowth" /><br />
 
                     <label for="fishEnergy">Fish Food Energy Value (0 - 100):</label>
-                    <input type="number" id="fishEnergy" value="36" step="1" /><br />
+                    <input type="number" id="fishEnergy" step="1" /><br />
 
                     <label for="fishingDifficulty">Fishing Difficulty:</label>
-                    <input type="number" id="fishingDifficulty" value="1"/><br />
+                    <input type="number" id="fishingDifficulty" /><br />
 
                     <label for="fullPondThreshold">Full Pond Threshold (0 - 1):</label>
-                    <input type="number" id="fullPondThreshold" value=".5"/><br />
+                    <input type="number" id="fullPondThreshold" /><br />
 
                 </div>
 
@@ -63,7 +66,7 @@
                     <h3>Other Parameters</h3>
 
                     <label for="updatesPerDraw">Updates Per Draw:</label>
-                    <input type="number" id="updatesPerDraw" value="10" /><br />
+                    <input type="number" id="updatesPerDraw" /><br />
 
                 </div>
             </div>
@@ -73,46 +76,40 @@
                 <div class="parameter-section">
                     <h3>Human Parameters</h3>
                     <label for="initialHumans">Initial Humans:</label>
-                    <input type="number" id="initialHumans" value="20" /><br />
+                    <input type="number" id="initialHumans" /><br />
 
                     <label for="initialEnergy">Initial Energy (0 - 100):</label>
-                    <input type="number" id="initialEnergy" value="20" step="10" /><br />
-
-                    <label for="deathThreshold">Energy Level to Die (0 - 100):</label>
-                    <input type="number" id="deathThreshold" value="0" /><br />
+                    <input type="number" id="initialEnergy" step="10" /><br />
 
                     <label for="maxHumanAge">Max Human Age:</label>
-                    <input type="number" id="maxHumanAge" value="1000" /><br />
+                    <input type="number" id="maxHumanAge" /><br />
 
                     <label for="deathReward">Death Reward (-):</label>
-                    <input type="number" id="deathReward" value="0" /><br />
+                    <input type="number" id="deathReward" /><br />
 
                     <label for="reproductionThreshold">Energy Required to Reproduce (0 - 100):</label>
-                    <input type="number" id="reproductionThreshold" value="95" step="5" /><br />
+                    <input type="number" id="reproductionThreshold" step="5" /><br />
 
                     <label for="supplyEatThreshold">Supply Full Threshold:</label>
-                    <input type="number" id="supplyEatThreshold" value="1" step="1" /><br />
+                    <input type="number" id="supplyEatThreshold" step="1" /><br />
 
                     <label for="ratioEnergyToOffspring">Energy Sacrificed to Offspring (0 - 1):</label>
-                    <input type="number" id="ratioEnergyToOffspring" value="0.4" step="0.1" /><br />
+                    <input type="number" id="ratioEnergyToOffspring" step="0.1" /><br />
 
                     <label for="basicEnergyDepletion">Energy Depletion Per Turn:</label>
-                    <input type="number" id="basicEnergyDepletion" value="0.05" step="0.002" /><br />
+                    <input type="number" id="basicEnergyDepletion" step="0.002" /><br />
 
                     <label for="hungerThreshold">Hunger Threshold (0 - 100):</label>
-                    <input type="number" id="hungerThreshold" value="20" /><br />
-
-                    <label for="sexualDriveMultiplier">Sex Drive Multiplier ( >= 0):</label>
-                    <input type="number" id="sexualDriveMultiplier" value="60" /><br />
+                    <input type="number" id="hungerThreshold" /><br />
 
                     <label for="epsilonDecay">Q Epsilon Decay:</label>
-                    <input type="number" id="epsilonDecay" value="0.9998" /><br />
+                    <input type="number" id="epsilonDecay" /><br />
 
                     <label for="qLearningRate">Q Learning Rate:</label>
-                    <input type="number" id="qLearningRate" value="0.05" /><br />
+                    <input type="number" id="qLearningRate" /><br />
 
                     <label for="qLearningDiscount">Q Discount:</label>
-                    <input type="number" id="qLearningDiscount" value="0.999" /><br />
+                    <input type="number" id="qLearningDiscount" /><br />
 
 
                 </div>
@@ -122,6 +119,7 @@
 
         <button type="button" onclick="reset()">Reset Simulation</button>
         <button type="button" onclick="harvest()">Harvest</button>
+<!--        <button type="button" onclick="updateGraph()">Show Current Locality</button>-->
         <button type="button" accesskey="a" onclick="pause()">Pause / Play</button>
         <div id="options">
 <!--            <input type="checkbox" id="graphs" checked />-->
@@ -139,7 +137,23 @@
             <input type="checkbox" id="isHungry" checked />
             <label for="isHungry">Is Hungry</label>
         </div>
+
+        <div id="cy" style="width: 800px; height: 600px; border: 1px solid black;"></div>
+
     </div>
+
+    <script>
+        window.onload = function () {
+            if (typeof PARAMS !== 'undefined') {
+                Object.keys(PARAMS).forEach(param => {
+                    let input = document.getElementById(param);
+                    if (input) {
+                        input.value = PARAMS[param];
+                    }
+                });
+            }
+        };
+    </script>
 </body>
 </html>
 

@@ -1,6 +1,6 @@
 var PARAMS = {
     // sim
-    updatesPerDraw: 50,
+    updatesPerDraw: 1,
 
     // automata
     pixelDimension: 800,
@@ -27,36 +27,43 @@ var PARAMS = {
     adultMigrationChance: 0.0001,
 
     // pond
-    minFish: 40,
-    pondCapacity: 2000,
-    initialFish: 100,
-    fishGrowth: .001,
-    fishEnergy: 6,
-    fishingDifficulty: 20,
+    minFish: 10,
+    pondCapacity: 600,
+    initialFish: 300,
+    fishGrowth: .05,
+    fishEnergy: 36,
+    fishingDifficulty: 1,
     fullPondThreshold: .5,
 
 
     // humans
-    initialHumans: 10,
+    initialHumans: 20,
     initialEnergy: 50,
     deathThreshold: 0,
     maxEnergy: 100,
-    reproductionThreshold: 90,
+    reproductionThreshold: 85,
     energyEatThreshold: 90,
-    supplyEatThreshold: 2,
-    ratioEnergyToOffspring: .5,
-    basicEnergyDepletion: .01,
-    hungerThreshold: 50,
-    broadcastLearning: false,
+    supplyEatThreshold: 1,
+    ratioEnergyToOffspring: .4,
+    basicEnergyDepletion: .05,
+    hungerThreshold: 20,
     metabolismDiminishingReturns: 20,
-    epsilonDecay: 0.9999,
+    epsilonDecay: 0.9998,
     generationalEpsDecay: .993,
     preventHumanExtinction: false,
     minHumans: 2,
     sexualDriveMultiplier: 60,
-    maxHumanAge: 3000,
-    deathReward: 400,
+    maxHumanAge: 1000,
+    deathReward: 0,
     qGeneMutationStd: .02,
+    broadcastLearning: false,
+    localBroadcastLearning: true,
+    localitySize: 15,
+
+    // locality
+    numFirstNeighbors: 1,
+    numSecondNeighbors: 1,
+    graphBroadcastDepth: 1,
 
     nullCost: 1,
     fishingCost: 20,
@@ -64,8 +71,8 @@ var PARAMS = {
     reproductionCost: 20,
 
 
-    qLearningRate: 0.5,
-    qLearningDiscount: 0.2,
+    qLearningRate: 0.05,
+    qLearningDiscount: 0.999,
     defaultQValue: 0,
 
 

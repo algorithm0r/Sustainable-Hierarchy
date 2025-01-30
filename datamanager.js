@@ -1,6 +1,7 @@
 class DataManager {
     constructor(automata) {
         this.automata = automata;
+        this.vis_graph_frequency = 10;
 
         // population data
         this.fishPopulation = [];
@@ -88,6 +89,7 @@ class DataManager {
         this.automata.maxHumanAge = this.automata.humans.reduce((m, human) => Math.max(human.age, m), 0);
         this.automata.minHumanAge = this.automata.humans.reduce((m, human) => Math.min(human.age, m), PARAMS.maxHumanAge*50);
         // this.automata.aveStartingEpsilon = (((this.automata.humans.reduce((sum, human) => sum + human.generationalEpsilonDecay, 0) / this.automata.humans.length) + 1) / 2).toFixed(3);
+
     }
 
     logData() {
@@ -96,6 +98,11 @@ class DataManager {
     update() {
         // Update data each frame
         if(this.automata.generation % PARAMS.reportingPeriod === 0) this.updateData();
+
+        if(this.automata.generation % (PARAMS.reportingPeriod * this.vis_graph_frequency) === 0) {
+            this.vis_graph_frequency = this.automata.locality.cy.nodes().length;
+            this.automata.locality.visualize_graph();
+        }
     }
 
     draw(ctx) {

@@ -26,8 +26,13 @@ function reset() {
 	loadParameters();
 	gameEngine.entities = [];
 	gameEngine.graphs = [];
+	lastHumanId = 0;
 	new Automata();
 };
+
+function updateGraph() {
+	gameEngine.automata.locality.visualize_graph_animate();
+}
 
 
 function harvest() {
@@ -38,6 +43,7 @@ function harvest() {
 
 function pause() {
     isRunning = !isRunning;
+	updateGraph();
 };
 
 ASSET_MANAGER.downloadAll(function () {

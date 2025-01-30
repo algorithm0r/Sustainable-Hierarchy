@@ -101,14 +101,14 @@ function loadParameters() {
 
     PARAMS.initialHumans = parseInt(document.getElementById("initialHumans").value);
     PARAMS.initialEnergy = parseInt(document.getElementById("initialEnergy").value);
-    PARAMS.deathThreshold = parseInt(document.getElementById("deathThreshold").value);
-    PARAMS.reproductionThreshold = parseInt(document.getElementById("reproductionThreshold").value);
+    // PARAMS.deathThreshold = parseInt(document.getElementById("deathThreshold").value);
+    // PARAMS.reproductionThreshold = parseInt(document.getElementById("reproductionThreshold").value);
     // PARAMS.energyEatThreshold = parseInt(document.getElementById("energyEatThreshold").value);
     PARAMS.supplyEatThreshold = parseInt(document.getElementById("supplyEatThreshold").value);
     PARAMS.ratioEnergyToOffspring = parseFloat(document.getElementById("ratioEnergyToOffspring").value);
     PARAMS.basicEnergyDepletion = parseFloat(document.getElementById("basicEnergyDepletion").value);
     PARAMS.hungerThreshold = parseInt(document.getElementById("hungerThreshold").value);
-    PARAMS.sexualDriveMultiplier = parseInt(document.getElementById("sexualDriveMultiplier").value);
+    // PARAMS.sexualDriveMultiplier = parseInt(document.getElementById("sexualDriveMultiplier").value);
     PARAMS.maxHumanAge = parseInt(document.getElementById("maxHumanAge").value);
     PARAMS.deathReward = parseInt(document.getElementById("deathReward").value);
 

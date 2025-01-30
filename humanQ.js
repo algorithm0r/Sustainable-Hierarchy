@@ -5,18 +5,16 @@
 
 class HumanQ {
 
-    static lastHumanId = 0;
 
     constructor({
-                    id = Human.lastHumanId + 1,
-                    energy = PARAMS.initialEnergy + generateNormalSample(0, 20),
-                    // parentQLearner = new QLearner(["null", "fish", "eat", "reproduce"], [2, 2, 3]),
-                    parentGeneSet = null,
-                    age = 0,
-                    // generationalEpsilonDecay = 1,
-                } = {}) {
-        // this.id = id;
-        Human.lastHumanId = id;
+            id = lastHumanId++,
+            energy = PARAMS.initialEnergy + generateNormalSample(0, 20),
+            // parentQLearner = new QLearner(["null", "fish", "eat", "reproduce"], [2, 2, 3]),
+            parentGeneSet = null,
+            age = 0,
+            // generationalEpsilonDecay = 1,
+            } = {}) {
+        this.id = id;
 
         this.energy = energy;
         this.supply = 0;
@@ -70,7 +68,8 @@ class HumanQ {
         // probability of catching 1 fish
         let numFish = gameEngine.automata.ponds[0].numFish;
         let fishAvailability = (numFish / PARAMS.pondCapacity) / PARAMS.fishingDifficulty;
-        if ((numFish > PARAMS.minFish) && (randomFloat(0, 1) > 1 - fishAvailability)) {
+        // if ((numFish > PARAMS.minFish) && (randomFloat(0, 1) > 1 - fishAvailability)) {
+        if (numFish > PARAMS.minFish) {
             gameEngine.automata.ponds[0].numFish -= 1;
             this.supply += 1;
         }
@@ -129,9 +128,7 @@ class HumanQ {
             parentGeneSet: this.geneSet,
             // generationalEpsilonDecay: this.generationalEpsilonDecay * PARAMS.generationalEpsDecay,
         });
-        gameEngine.automata.humans.push(baby);
-        gameEngine.automata.totalBirths++;
-
+        gameEngine.automata.add_human(baby);
         return baby;
     }
 
@@ -156,8 +153,10 @@ class HumanQ {
     }
 
     learn(state, action, reward, nextState) {
-        if (PARAMS.broadcastLearning) {
-            // calls learn on all humans in 5x5 neighborhood (including this humans)
+        if (PARAMS.localBroadcastLearning) {
+            // this.local_broadcast(state, action, reward, nextState);
+            this.graph_broadcast(state, action, reward, nextState, 0);
+        } else if (PARAMS.broadcastLearning) {
             this.broadcast(state, action, reward, nextState);
         } else {
             this.learner.learn(state, action, reward, nextState);
@@ -175,6 +174,32 @@ class HumanQ {
             // }
             human.learner.learn(state, action, reward, nextState);
         });
+    }
+    //
+    // local_broadcast(state, action, reward, nextState) {
+    //     this.learner.learn(state, action, reward, nextState);
+    //     for (let i = 0; i < PARAMS.localitySize; i++) {
+    //         let random_human_index = randomInt(gameEngine.automata.humans.length);
+    //         let human = gameEngine.automata.humans[random_human_index];
+    //         human.learner.learn(state, action, reward, nextState);
+    //     }
+    // }
+
+    graph_broadcast(state, action, reward, nextState, recurse_lvl) {
+        this.learner.learn(state, action, reward, nextState);
+        // TODO: can't go more than 1 deep without handling repeating a node.
+        console.assert(PARAMS.graphBroadcastDepth <= 1);
+        if (recurse_lvl < PARAMS.graphBroadcastDepth) {
+            let neighbors = gameEngine.automata.locality.get_neighbors(this.id);
+
+            neighbors.map(n => n.data('ref')).forEach(neighbor => {
+                neighbor.graph_broadcast(state, action, reward, nextState, recurse_lvl+1);
+            });
+            // neighbors.forEach(neighbor_id => {
+            //     let neighbor = gameEngine.automata.locality.G.getNodeAttribute(neighbor_id, 'ref');
+            //     neighbor.graph_broadcast(state, action, reward, nextState, recurse_lvl+1);
+            // });
+        }
     }
 
     selectAction() {
@@ -219,8 +244,8 @@ class HumanQ {
                 return this.fish();
             case 2:
                 return this.eat();
-            case 3:
-                return this.reproduce();
+            // case 3:
+            //     return this.reproduce();
             }
     }
 
