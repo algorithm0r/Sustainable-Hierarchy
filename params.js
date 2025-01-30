@@ -64,6 +64,7 @@ var PARAMS = {
     numFirstNeighbors: 1,
     numSecondNeighbors: 1,
     graphBroadcastDepth: 1,
+    localityMode: 'triangle',
 
     nullCost: 1,
     fishingCost: 20,
